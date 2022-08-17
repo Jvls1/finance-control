@@ -8,11 +8,15 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="expense")
+@Table(name = "expense")
 @Getter
 @Setter
 @NoArgsConstructor
 public class Expense extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(name = "description", length = 100, nullable = false)
     private String description;
@@ -20,10 +24,8 @@ public class Expense extends BaseEntity {
     @Column(name = "amount", precision = 8, scale = 2, nullable = false)
     private Double amount;
 
+//    mudar data de registro para data da compra.
     @Column(name = "register_date", nullable = false)
     private LocalDate registerDate;
 
-    @ManyToOne
-    @JoinColumn(name = "expense_type_id", nullable = false)
-    private ExpenseType expenseTypeId;
 }
