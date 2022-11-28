@@ -1,12 +1,13 @@
 package com.jojo.financialcontrol.service;
 
-import com.jojo.financialcontrol.repository.IUserRepository;
+import com.jojo.financialcontrol.repository.IExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class ExpenseServiceImpl implements IExpenseService {
 
     @Autowired
-    IUserRepository iUserRepository;
+    IExpenseRepository iExpenseRepository;
+
 }
