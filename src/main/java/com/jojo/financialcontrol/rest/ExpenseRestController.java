@@ -2,12 +2,12 @@ package com.jojo.financialcontrol.rest;
 
 
 import com.jojo.financialcontrol.entity.Expense;
-import com.jojo.financialcontrol.entity.Income;
 import com.jojo.financialcontrol.response.ResponseHandler;
-import com.jojo.financialcontrol.service.ExpenseService;
+import com.jojo.financialcontrol.service.IExpenseService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +17,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ExpenseRestController {
 
-    private final ExpenseService expenseService;
+    private final IExpenseService expenseService;
 
     @GetMapping("/expenses")
     List<Expense> findAll() {

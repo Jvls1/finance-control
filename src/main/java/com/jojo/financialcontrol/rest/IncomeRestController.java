@@ -3,7 +3,8 @@ package com.jojo.financialcontrol.rest;
 
 import com.jojo.financialcontrol.entity.Income;
 import com.jojo.financialcontrol.response.ResponseHandler;
-import com.jojo.financialcontrol.service.IncomeService;
+import com.jojo.financialcontrol.service.IIncomeService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,13 +14,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@AllArgsConstructor
 public class IncomeRestController {
 
-    private final IncomeService incomeService;
-
-    public IncomeRestController(IncomeService incomeService) {
-        this.incomeService = incomeService;
-    }
+    private final IIncomeService incomeService;
 
     @GetMapping("/incomes")
     List<Income> findAll() {
@@ -32,7 +30,6 @@ public class IncomeRestController {
 
         return ResponseHandler.getResponse(income);
     }
-
 
     @PostMapping("/incomes")
     private ResponseEntity<Object> save(@RequestBody Income incomeParam) {
