@@ -1,14 +1,16 @@
 package com.jojo.financialcontrol.entity;
 
+import com.jojo.financialcontrol.entity.generic.BaseEntity;
 import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import javax.persistence.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "expense")
@@ -18,8 +20,9 @@ import java.time.LocalDate;
 public class Expense extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue
+    @UuidGenerator
+    private UUID id;
 
     @Column(name = "description", length = 100, nullable = false)
     private String description;

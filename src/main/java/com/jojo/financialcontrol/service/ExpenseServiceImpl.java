@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ExpenseServiceImpl implements IExpenseService {
 
-    @Autowired
     IExpenseRepository iExpenseRepository;
 
     @Override
@@ -20,7 +20,7 @@ public class ExpenseServiceImpl implements IExpenseService {
     }
 
     @Override
-    public Optional<Expense> findById(Integer idExpense) {
+    public Optional<Expense> findById(UUID idExpense) {
         return iExpenseRepository.findById(idExpense);
     }
 
@@ -30,7 +30,7 @@ public class ExpenseServiceImpl implements IExpenseService {
     }
 
     @Override
-    public void deleteById(Integer idExpense) {
+    public void deleteById(UUID idExpense) {
         iExpenseRepository.deleteById(idExpense);
     }
 }

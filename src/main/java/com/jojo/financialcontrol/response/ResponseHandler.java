@@ -1,6 +1,6 @@
 package com.jojo.financialcontrol.response;
 
-import com.jojo.financialcontrol.entity.BaseEntity;
+import com.jojo.financialcontrol.entity.generic.BaseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

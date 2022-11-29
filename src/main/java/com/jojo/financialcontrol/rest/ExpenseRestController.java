@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -25,7 +26,7 @@ public class ExpenseRestController {
     }
 
     @GetMapping("/expenses/{id}")
-    public ResponseEntity<Object> getExpenseById(@PathVariable("id") Integer idExpense) {
+    public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idExpense) {
         Optional<Expense> expense = expenseService.findById(idExpense);
 
         return ResponseHandler.getResponse(expense);
@@ -43,7 +44,7 @@ public class ExpenseRestController {
     }
 
     @DeleteMapping("/expenses/{id}")
-    public void deleteById(@PathVariable("id") Integer idExpense) {
+    public void deleteById(@PathVariable("id") UUID idExpense) {
         expenseService.deleteById(idExpense);
     }
 }

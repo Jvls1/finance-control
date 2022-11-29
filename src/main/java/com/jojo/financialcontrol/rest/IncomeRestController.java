@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -25,7 +26,7 @@ public class IncomeRestController {
     }
 
     @GetMapping("/incomes/{id}")
-    public ResponseEntity<Object> getExpenseById(@PathVariable("id") Integer idIncome) {
+    public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idIncome) {
         Optional<Income> income = incomeService.findById(idIncome);
 
         return ResponseHandler.getResponse(income);
@@ -43,7 +44,7 @@ public class IncomeRestController {
     }
 
     @DeleteMapping("/incomes/{id}")
-    public void deleteById(@PathVariable("id") Integer idIncome) {
+    public void deleteById(@PathVariable("id") UUID idIncome) {
         incomeService.deleteById(idIncome);
     }
 }
