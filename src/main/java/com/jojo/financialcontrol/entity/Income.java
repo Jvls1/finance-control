@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -22,7 +23,7 @@ public class Income extends BaseEntity {
     private String description;
 
     @Column(name = "amount", precision = 8, scale = 2, nullable = false)
-    private Double amount;
+    private BigDecimal amount;
 
     @Column(name = "register_date", nullable = false)
     private LocalDate registerDate;

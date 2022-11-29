@@ -3,7 +3,7 @@ package com.jojo.financialcontrol.rest;
 
 import com.jojo.financialcontrol.entity.Expense;
 import com.jojo.financialcontrol.response.ResponseHandler;
-import com.jojo.financialcontrol.service.IExpenseService;
+import com.jojo.financialcontrol.service.ExpenseServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ExpenseRestController {
 
-    private final IExpenseService expenseService;
+    private final ExpenseServiceImpl expenseService;
 
     @GetMapping("/expenses")
     List<Expense> findAll() {
@@ -32,7 +32,7 @@ public class ExpenseRestController {
     }
 
     @PostMapping("/expenses")
-    private ResponseEntity<Object> save(@RequestBody Expense expenseParam) {
+    public ResponseEntity<Object> save(@RequestBody Expense expenseParam) {
         if (expenseParam != null) {
             if (expenseParam.getDescription() != null && expenseParam.getAmount() != null) {
                 expenseParam.setRegisterDate(LocalDate.now());
@@ -43,7 +43,7 @@ public class ExpenseRestController {
     }
 
     @DeleteMapping("/expenses/{id}")
-    private void deleteById(@PathVariable("id") Integer idExpense) {
+    public void deleteById(@PathVariable("id") Integer idExpense) {
         expenseService.deleteById(idExpense);
     }
 }
