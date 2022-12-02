@@ -14,7 +14,7 @@ import java.util.UUID;
 public class IncomeServiceImpl implements IIncomeService {
 
     @Autowired
-    IIncomeRepository iIncomeRepository;
+    private IIncomeRepository iIncomeRepository;
 
     @Override
     public List<Income> findAll() {

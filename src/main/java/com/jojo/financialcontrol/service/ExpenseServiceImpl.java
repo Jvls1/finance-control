@@ -12,7 +12,8 @@ import java.util.UUID;
 @Service
 public class ExpenseServiceImpl implements IExpenseService {
 
-    IExpenseRepository iExpenseRepository;
+    @Autowired
+    private IExpenseRepository iExpenseRepository;
 
     @Override
     public List<Expense> findAll() {
