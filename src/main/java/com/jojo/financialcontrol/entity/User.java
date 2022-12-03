@@ -36,4 +36,7 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy="usr")
     private List<Expense> expenses;
+
+    @OneToMany(mappedBy="usr")
+    private List<Wallet> wallets;
 }
