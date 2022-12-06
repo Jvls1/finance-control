@@ -15,6 +15,10 @@ public class ExpenseServiceImpl implements IExpenseService {
     @Autowired
     private IExpenseRepository iExpenseRepository;
 
+    public ExpenseServiceImpl(IExpenseRepository iExpenseRepository) {
+        this.iExpenseRepository = iExpenseRepository;
+    }
+
     @Override
     public List<Expense> findAll() {
         return iExpenseRepository.findAll();

@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface IExpenseRepository extends JpaRepository<Expense, UUID> {
+public interface IExpenseRepository extends IGenericRepository<Expense> {
 }
