@@ -16,17 +16,17 @@ import javax.sql.DataSource;
 @EnableJpaRepositories(basePackages = "com.jojo.financialcontrol.repository")
 public class DataBaseConfig {
 
-    @Bean
-    public EntityManagerFactory entityManagerFactory() {
-
-        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-        factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        factory.setPackagesToScan("com.jojo.financialcontrol.entity");
-        factory.setDataSource(dataSource());
-        factory.afterPropertiesSet();
-
-        return factory.getObject();
-    }
+//    @Bean
+//    public EntityManagerFactory entityManagerFactory() {
+//
+//        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+//        factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+//        factory.setPackagesToScan("com.jojo.financialcontrol.entity");
+//        factory.setDataSource(dataSource());
+//        factory.afterPropertiesSet();
+//
+//        return factory.getObject();
+//    }
 
     @Bean
     public DataSource dataSource() {
@@ -41,13 +41,13 @@ public class DataBaseConfig {
 
     }
 
-    @Bean
-    public TransactionManager transactionManager() {
-
-        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
-        transactionManager.setDataSource(dataSource());
-
-        return transactionManager;
-    }
+//    @Bean
+//    public TransactionManager transactionManager() {
+//
+//        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
+//        transactionManager.setDataSource(dataSource());
+//
+//        return transactionManager;
+//    }
 
 }

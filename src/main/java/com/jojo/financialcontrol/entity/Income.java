@@ -25,8 +25,8 @@ public class Income extends BaseEntity {
     @Column(name = "register_date", nullable = false)
     private LocalDate registerDate;
 
-    @ManyToOne
-    @JoinColumn(name="usr_id", nullable=false)
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name="usr_id", nullable=false)
+//    private User user;
 
 }

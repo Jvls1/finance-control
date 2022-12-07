@@ -27,11 +27,11 @@ public class User extends BaseEntity {
     @Column(name = "email", length = 255, nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy="usr")
-    private List<Income> incomes;
-
-    @OneToMany(mappedBy="usr")
-    private List<Expense> expenses;
+//    @OneToMany(mappedBy="usr")
+//    private List<Income> incomes;
+//
+//    @OneToMany(mappedBy="usr")
+//    private List<Expense> expenses;
 
 //    @OneToMany(mappedBy="usr")
 //    private List<Wallet> wallets;

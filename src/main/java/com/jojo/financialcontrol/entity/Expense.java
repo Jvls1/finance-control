@@ -26,9 +26,9 @@ public class Expense extends BaseEntity {
     @Column(name = "register_date", nullable = false)
     private LocalDate registerDate;
     
-    @ManyToOne
-    @JoinColumn(name = "usr_id", nullable = false)
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "usr_id", nullable = false)
+//    private User user;
 
     @Column(name = "buy_method", nullable = false)
     private EnumBuyMethod enumBuyMethod;
