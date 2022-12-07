@@ -1,9 +1,8 @@
 package com.jojo.financialcontrol.service;
 
-import com.jojo.financialcontrol.entity.Expense;
 import com.jojo.financialcontrol.entity.Income;
 import com.jojo.financialcontrol.repository.IIncomeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,10 +10,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class IncomeServiceImpl implements IIncomeService {
 
-    @Autowired
-    private IIncomeRepository iIncomeRepository;
+    private final IIncomeRepository iIncomeRepository;
 
     @Override
     public List<Income> findAll() {

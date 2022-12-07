@@ -18,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class IncomeRestController {
 
-    private IncomeServiceImpl incomeService;
+    private final IncomeServiceImpl incomeService;
 
     @GetMapping("/incomes")
     List<Income> findAll() {

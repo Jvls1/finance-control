@@ -4,12 +4,10 @@ import com.jojo.financialcontrol.entity.generic.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UuidGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table(name = "income")
@@ -17,11 +15,6 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class Income extends BaseEntity {
-
-    @Id
-    @GeneratedValue
-    @UuidGenerator
-    private UUID id;
 
     @Column(name = "description", length = 100, nullable = false)
     private String description;

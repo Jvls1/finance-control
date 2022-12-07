@@ -2,6 +2,7 @@ package com.jojo.financialcontrol.service;
 
 import com.jojo.financialcontrol.entity.Expense;
 import com.jojo.financialcontrol.repository.IExpenseRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +11,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class ExpenseServiceImpl implements IExpenseService {
 
-    @Autowired
-    private IExpenseRepository iExpenseRepository;
-
-    public ExpenseServiceImpl(IExpenseRepository iExpenseRepository) {
-        this.iExpenseRepository = iExpenseRepository;
-    }
+    private final IExpenseRepository iExpenseRepository;
 
     @Override
     public List<Expense> findAll() {

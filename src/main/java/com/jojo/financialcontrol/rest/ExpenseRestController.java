@@ -4,7 +4,7 @@ package com.jojo.financialcontrol.rest;
 import com.jojo.financialcontrol.entity.Expense;
 import com.jojo.financialcontrol.response.ResponseHandler;
 import com.jojo.financialcontrol.service.ExpenseServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +15,13 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
+@AllArgsConstructor
 public class ExpenseRestController {
 
-    @Autowired
-    private ExpenseServiceImpl expenseService;
+    private final ExpenseServiceImpl expenseService;
 
     @GetMapping("/expenses")
-    List<Expense> findAll() {
+    public List<Expense> findAll() {
         return expenseService.findAll();
     }
 

@@ -4,11 +4,12 @@ import com.jojo.financialcontrol.entity.generic.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UuidGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "usr")
@@ -16,11 +17,6 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class User extends BaseEntity {
-
-    @Id
-    @GeneratedValue
-    @UuidGenerator
-    private UUID id;
 
     @Column(name = "username", length = 255, nullable = false)
     private String username;
