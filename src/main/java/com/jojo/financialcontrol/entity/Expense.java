@@ -23,12 +23,16 @@ public class Expense extends BaseEntity {
     @Column(name = "amount", precision = 8, scale = 2, nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "register_date", nullable = false)
+    @Column(name = "date_register", nullable = false)
     private LocalDate registerDate;
-    
-//    @ManyToOne
-//    @JoinColumn(name = "usr_id", nullable = false)
-//    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_user", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_wallet", nullable = false)
+    private Wallet wallet;
 
     @Column(name = "buy_method", nullable = false)
     private EnumBuyMethod enumBuyMethod;
