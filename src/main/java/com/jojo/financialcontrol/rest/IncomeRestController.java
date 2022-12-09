@@ -36,7 +36,7 @@ public class IncomeRestController {
     public ResponseEntity<Object> save(@RequestBody Income incomeParam) {
         if (incomeParam != null) {
             if (incomeParam.getDescription() != null && incomeParam.getAmount() != null) {
-                incomeParam.setRegisterDate(LocalDate.now());
+                incomeParam.setDateRegister(LocalDate.now());
                 incomeService.save(incomeParam);
             }
         }

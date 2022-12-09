@@ -26,10 +26,10 @@ public class Wallet extends BaseEntity {
     private List<Expense> expenses;
 
     @ManyToOne
-    @JoinColumn(name = "id_user", nullable = false)
+    @JoinColumn(name = "id_user_owner", nullable = false)
     private User walletOwner;
 
     @ManyToOne
-    @JoinColumn(name = "id_user", nullable = false)
+    @JoinColumn(name = "id_user_collaborator", nullable = false)
     private User walletCollaborator;
 }

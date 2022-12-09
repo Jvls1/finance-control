@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "usr")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,6 +24,9 @@ public class User extends BaseEntity {
     @Column(name = "email", length = 255, nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Wallet> wallets;
+    @OneToMany(mappedBy = "walletOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Wallet> walletsOwner;
+
+    @OneToMany(mappedBy = "walletCollaborator", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Wallet> walletsCollaborator;
 }

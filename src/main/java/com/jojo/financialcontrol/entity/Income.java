@@ -23,7 +23,7 @@ public class Income extends BaseEntity {
     private BigDecimal amount;
 
     @Column(name = "date_register", nullable = false)
-    private LocalDate registerDate;
+    private LocalDate dateRegister;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user", nullable = false)

@@ -36,7 +36,7 @@ public class ExpenseRestController {
     public ResponseEntity<Object> save(@RequestBody Expense expenseParam) {
         if (expenseParam != null) {
             if (expenseParam.getDescription() != null && expenseParam.getAmount() != null) {
-                expenseParam.setRegisterDate(LocalDate.now());
+                expenseParam.setDateRegister(LocalDate.now());
                 expenseService.save(expenseParam);
             }
         }
