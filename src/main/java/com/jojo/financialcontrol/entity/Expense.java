@@ -35,5 +35,6 @@ public class Expense extends BaseEntity {
     private Wallet wallet;
 
     @Column(name = "buy_method", nullable = false)
+    @Enumerated(EnumType.STRING)
     private EnumBuyMethod enumBuyMethod;
 }
