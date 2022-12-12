@@ -30,6 +30,6 @@ public class Wallet extends BaseEntity {
     private User walletOwner;
 
     @ManyToOne
-    @JoinColumn(name = "id_user_collaborator", nullable = false)
+    @JoinColumn(name = "id_user_collaborator")
     private User walletCollaborator;
 }

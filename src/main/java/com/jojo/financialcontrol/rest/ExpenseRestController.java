@@ -2,6 +2,7 @@ package com.jojo.financialcontrol.rest;
 
 
 import com.jojo.financialcontrol.entity.Expense;
+import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import com.jojo.financialcontrol.response.ResponseHandler;
 import com.jojo.financialcontrol.service.ExpenseServiceImpl;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,7 @@ public class ExpenseRestController {
         if (expenseParam != null) {
             if (expenseParam.getDescription() != null && expenseParam.getAmount() != null) {
                 expenseParam.setDateRegister(LocalDate.now());
+                expenseParam.setEnumBuyMethod(EnumBuyMethod.CASH);
                 expenseService.save(expenseParam);
             }
         }
