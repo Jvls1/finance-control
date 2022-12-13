@@ -19,10 +19,9 @@ public class UserRestController {
     private final UserServiceImpl userService;
 
     @PostMapping("/user")
-    public ResponseEntity<Object> save(@RequestBody User userParam) {
-        if (userParam != null) {
-            userService.save(userParam);
-        }
-        return ResponseHandler.saveResponse(userParam);
+    public ResponseEntity<Object> save(@RequestBody User user) {
+        User persistedUser = userService.save(user);
+
+        return ResponseHandler.saveResponse(persistedUser);
     }
 }

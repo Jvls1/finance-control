@@ -6,45 +6,39 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class ResponseHandler {
 
-    public static <T> ResponseEntity<Object> getResponse(Optional<T> entity) {
-        if (entity.isPresent()) {
+    public static <T> ResponseEntity<Object> getResponse(T entity) {
+        if (entity != null) {
             return generateResponse(
                     "Find!",
-                    HttpStatus.OK,
-                    entity
+                    HttpStatus.OK
             );
         }
         return generateResponse(
                 "Error!",
-                HttpStatus.BAD_REQUEST,
-                null
+                HttpStatus.BAD_REQUEST
         );
     }
 
     public static <T extends BaseEntity> ResponseEntity<Object> saveResponse(T entity) {
         if (entity != null) {
             return generateResponse(
-                    "Find!",
-                    HttpStatus.OK,
-                    entity
+                    "Created",
+                    HttpStatus.CREATED
             );
         }
         return generateResponse(
                 "Error!",
-                HttpStatus.BAD_REQUEST,
-                null
+                HttpStatus.BAD_REQUEST
         );
     }
 
-    private static ResponseEntity<Object> generateResponse(String message, HttpStatus status, Object responseObj) {
+    private static ResponseEntity<Object> generateResponse(String message, HttpStatus status) {
         Map<String, Object> map = new HashMap<>();
         map.put("message", message);
         map.put("status", status.value());
-        map.put("data", responseObj);
 
         return new ResponseEntity<>(map, status);
     }

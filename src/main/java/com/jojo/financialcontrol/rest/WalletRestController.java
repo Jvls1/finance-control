@@ -1,7 +1,6 @@
 package com.jojo.financialcontrol.rest;
 
 
-import com.jojo.financialcontrol.entity.Income;
 import com.jojo.financialcontrol.entity.Wallet;
 import com.jojo.financialcontrol.response.ResponseHandler;
 import com.jojo.financialcontrol.service.WalletServiceImpl;
@@ -9,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

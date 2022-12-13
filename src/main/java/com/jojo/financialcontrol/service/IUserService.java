@@ -13,7 +13,7 @@ public interface IUserService {
 
     Optional<User> findById(UUID idUser);
 
-    void save(User wallet);
+    User save(User wallet);
 
     void deleteById(UUID idUser);
 
