@@ -1,11 +1,13 @@
 package com.jojo.financialcontrol.service;
 
 import com.jojo.financialcontrol.entity.Expense;
+import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import com.jojo.financialcontrol.repository.IExpenseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,7 +30,13 @@ public class ExpenseServiceImpl implements IExpenseService {
 
     @Override
     public void save(Expense expense) {
-        iExpenseRepository.save(expense);
+        if (expense != null) {
+            if (expense.getDescription() != null && expense.getAmount() != null) {
+                expense.setDateRegister(LocalDate.now());
+                expense.setEnumBuyMethod(EnumBuyMethod.CASH);
+                iExpenseRepository.save(expense);
+            }
+        }
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.jojo.financialcontrol.entity.User;
 import com.jojo.financialcontrol.response.ResponseHandler;
 import com.jojo.financialcontrol.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +21,12 @@ public class UserRestController {
 
     @PostMapping("/user")
     public ResponseEntity<Object> save(@RequestBody User user) {
-        User persistedUser = userService.save(user);
+        try {
+            userService.save(user);
+            return ResponseHandler.saveResponse("Created", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return ResponseHandler.saveResponse("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-        return ResponseHandler.saveResponse(persistedUser);
     }
 }

@@ -22,15 +22,15 @@ public class ResponseHandler {
         );
     }
 
-    public static <T extends BaseEntity> ResponseEntity<Object> saveResponse(T entity) {
-        if (entity != null) {
+    public static <T extends BaseEntity> ResponseEntity<Object> saveResponse(String message, HttpStatus status) {
+        if (message != null && status != null) {
             return generateResponse(
-                    "Created",
-                    HttpStatus.CREATED
+                    message,
+                    status
             );
         }
         return generateResponse(
-                "Error!",
+                "Error",
                 HttpStatus.BAD_REQUEST
         );
     }

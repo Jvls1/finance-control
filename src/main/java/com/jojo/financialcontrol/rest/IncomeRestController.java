@@ -20,31 +20,31 @@ public class IncomeRestController {
 
     private final IncomeServiceImpl incomeService;
 
-    @GetMapping("/incomes")
-    List<Income> findAll() {
-        return incomeService.findAll();
-    }
-
-    @GetMapping("/incomes/{id}")
-    public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idIncome) {
-        Optional<Income> income = incomeService.findById(idIncome);
-
-        return ResponseHandler.getResponse(income);
-    }
-
-    @PostMapping("/incomes")
-    public ResponseEntity<Object> save(@RequestBody Income incomeParam) {
-        if (incomeParam != null) {
-            if (incomeParam.getDescription() != null && incomeParam.getAmount() != null) {
-                incomeParam.setDateRegister(LocalDate.now());
-                incomeService.save(incomeParam);
-            }
-        }
-        return ResponseHandler.saveResponse(incomeParam);
-    }
-
-    @DeleteMapping("/incomes/{id}")
-    public void deleteById(@PathVariable("id") UUID idIncome) {
-        incomeService.deleteById(idIncome);
-    }
+//    @GetMapping("/incomes")
+//    List<Income> findAll() {
+//        return incomeService.findAll();
+//    }
+//
+//    @GetMapping("/incomes/{id}")
+//    public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idIncome) {
+//        Optional<Income> income = incomeService.findById(idIncome);
+//
+//        return ResponseHandler.getResponse(income);
+//    }
+//
+//    @PostMapping("/incomes")
+//    public ResponseEntity<Object> save(@RequestBody Income incomeParam) {
+//        if (incomeParam != null) {
+//            if (incomeParam.getDescription() != null && incomeParam.getAmount() != null) {
+//                incomeParam.setDateRegister(LocalDate.now());
+//                incomeService.save(incomeParam);
+//            }
+//        }
+//        return ResponseHandler.saveResponse(incomeParam);
+//    }
+//
+//    @DeleteMapping("/incomes/{id}")
+//    public void deleteById(@PathVariable("id") UUID idIncome) {
+//        incomeService.deleteById(idIncome);
+//    }
 }

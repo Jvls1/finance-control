@@ -6,6 +6,7 @@ import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import com.jojo.financialcontrol.response.ResponseHandler;
 import com.jojo.financialcontrol.service.ExpenseServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,14 +36,12 @@ public class ExpenseRestController {
 
     @PostMapping("/expenses")
     public ResponseEntity<Object> save(@RequestBody Expense expenseParam) {
-        if (expenseParam != null) {
-            if (expenseParam.getDescription() != null && expenseParam.getAmount() != null) {
-                expenseParam.setDateRegister(LocalDate.now());
-                expenseParam.setEnumBuyMethod(EnumBuyMethod.CASH);
-                expenseService.save(expenseParam);
-            }
+        try {
+            expenseService.save(expenseParam);
+            return ResponseHandler.saveResponse("Created", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return ResponseHandler.saveResponse("Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return ResponseHandler.saveResponse(expenseParam);
     }
 
     @DeleteMapping("/expenses/{id}")

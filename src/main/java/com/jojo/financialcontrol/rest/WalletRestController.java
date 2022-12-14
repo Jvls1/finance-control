@@ -19,28 +19,28 @@ public class WalletRestController {
 
     private final WalletServiceImpl walletService;
 
-    @GetMapping("/wallets")
-    List<Wallet> findAll() {
-        return walletService.findAll();
-    }
-
-    @GetMapping("/wallets/{id}")
-    public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idIncome) {
-        Optional<Wallet> income = walletService.findById(idIncome);
-
-        return ResponseHandler.getResponse(income);
-    }
-
-    @PostMapping("/wallets")
-    public ResponseEntity<Object> save(@RequestBody Wallet walletParam) {
-        if (walletParam != null) {
-            walletService.save(walletParam);
-        }
-        return ResponseHandler.saveResponse(walletParam);
-    }
-
-    @DeleteMapping("/wallets/{id}")
-    public void deleteById(@PathVariable("id") UUID idIncome) {
-        walletService.deleteById(idIncome);
-    }
+//    @GetMapping("/wallets")
+//    List<Wallet> findAll() {
+//        return walletService.findAll();
+//    }
+//
+//    @GetMapping("/wallets/{id}")
+//    public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idIncome) {
+//        Optional<Wallet> income = walletService.findById(idIncome);
+//
+//        return ResponseHandler.getResponse(income);
+//    }
+//
+//    @PostMapping("/wallets")
+//    public ResponseEntity<Object> save(@RequestBody Wallet walletParam) {
+//        if (walletParam != null) {
+//            walletService.save(walletParam);
+//        }
+//        return ResponseHandler.saveResponse(walletParam);
+//    }
+//
+//    @DeleteMapping("/wallets/{id}")
+//    public void deleteById(@PathVariable("id") UUID idIncome) {
+//        walletService.deleteById(idIncome);
+//    }
 }
