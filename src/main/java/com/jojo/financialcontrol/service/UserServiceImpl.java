@@ -28,10 +28,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User save(User user) {
-        if (user != null && user.getEmail() != null && user.getName() != null && user.getPassword() != null)
-            return iUserRepository.save(user);
-        
-        return user;
+        return iUserRepository.save(user);
     }
 
     @Override
