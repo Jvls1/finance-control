@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -21,10 +22,12 @@ public class User extends BaseEntity {
     private String name;
 
     @Column(name = "password", length = 255, nullable = false)
+    @Size(min = 8, max = 255)
     @NotBlank(message = "Password is mandatory")
     private String password;
 
     @Column(name = "email", length = 255, nullable = false, unique = true)
+    @Size(min = 8, max = 255)
     @NotBlank(message = "Email is mandatory")
     private String email;
 
