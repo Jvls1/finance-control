@@ -5,6 +5,7 @@ import com.jojo.financialcontrol.entity.Income;
 import com.jojo.financialcontrol.response.ResponseHandler;
 import com.jojo.financialcontrol.service.IncomeServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,31 +21,47 @@ public class IncomeRestController {
 
     private final IncomeServiceImpl incomeService;
 
-//    @GetMapping("/incomes")
-//    List<Income> findAll() {
-//        return incomeService.findAll();
-//    }
-//
-//    @GetMapping("/incomes/{id}")
-//    public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idIncome) {
-//        Optional<Income> income = incomeService.findById(idIncome);
-//
-//        return ResponseHandler.getResponse(income);
-//    }
-//
-//    @PostMapping("/incomes")
-//    public ResponseEntity<Object> save(@RequestBody Income incomeParam) {
-//        if (incomeParam != null) {
-//            if (incomeParam.getDescription() != null && incomeParam.getAmount() != null) {
-//                incomeParam.setDateRegister(LocalDate.now());
-//                incomeService.save(incomeParam);
-//            }
-//        }
-//        return ResponseHandler.saveResponse(incomeParam);
-//    }
-//
-//    @DeleteMapping("/incomes/{id}")
-//    public void deleteById(@PathVariable("id") UUID idIncome) {
-//        incomeService.deleteById(idIncome);
-//    }
+    @GetMapping("/incomes")
+    public ResponseEntity<Object> findAll() {
+        try {
+            List<Income> incomes = incomeService.findAll();
+            return new ResponseEntity<>(incomes, HttpStatus.OK);
+        } catch (Exception ex) {
+            return ResponseEntity.internalServerError().body("Internal Error");
+        }
+    }
+
+    @GetMapping("/incomes/{id}")
+    public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idIncome) {
+        try {
+            Optional<Income> income = incomeService.findById(idIncome);
+            if (income.isEmpty()) {
+                return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(income.get(), HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error");
+        }
+    }
+
+    @PostMapping("/incomes")
+    public ResponseEntity<Object> save(@RequestBody Income incomeParam) {
+        try {
+            incomeParam.setDateRegister(LocalDate.now());
+            incomeService.save(incomeParam);
+            return ResponseEntity.ok("Created");
+        } catch (Exception ex) {
+            return ResponseEntity.internalServerError().body("Internal Error");
+        }
+    }
+
+    @DeleteMapping("/incomes/{id}")
+    public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idIncome) {
+        try {
+            incomeService.deleteById(idIncome);
+            return ResponseEntity.ok("Deleted");
+        } catch (Exception ex) {
+            return ResponseEntity.internalServerError().body("Internal Error");
+        }
+    }
 }

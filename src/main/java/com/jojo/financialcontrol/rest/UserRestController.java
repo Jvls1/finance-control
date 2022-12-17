@@ -2,6 +2,7 @@ package com.jojo.financialcontrol.rest;
 
 
 import com.jojo.financialcontrol.entity.User;
+import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,11 +27,10 @@ public class UserRestController {
     public ResponseEntity<Object> findById(@PathVariable("id") UUID idUser) {
         try {
             Optional<User> user = userService.findById(idUser);
-            if (user.isPresent()) {
-                return new ResponseEntity<>(user.get(), HttpStatus.OK);
-            } else {
+            if (user.isEmpty()) {
                 return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
             }
+            return new ResponseEntity<>(user.get(), HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Error");
         }
@@ -43,7 +43,9 @@ public class UserRestController {
             return ResponseEntity.ok("Created");
         } catch (DataIntegrityViolationException ex) {
             return ResponseEntity.internalServerError().body("This email address is registered with another account.");
-        } catch (Exception e) {
+        } catch (UserCreationException ex) {
+            return ResponseEntity.badRequest().body("This is a invalid Email");
+        } catch (Exception ex) {
             return ResponseEntity.internalServerError().body("Internal Error");
         }
 

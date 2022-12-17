@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class Wallet extends BaseEntity {
 
     @Column(name = "month", nullable = false)
+    @NotBlank
     private LocalDate month;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -27,6 +29,7 @@ public class Wallet extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_user_owner", nullable = false)
+    @NotBlank
     private User walletOwner;
 
     @ManyToOne

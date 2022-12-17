@@ -2,7 +2,6 @@ package com.jojo.financialcontrol.rest;
 
 
 import com.jojo.financialcontrol.entity.Expense;
-import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import com.jojo.financialcontrol.response.ResponseHandler;
 import com.jojo.financialcontrol.service.ExpenseServiceImpl;
 import lombok.AllArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

@@ -21,17 +21,17 @@ public class IncomeServiceImpl implements IIncomeService {
     }
 
     @Override
-    public Optional<Income> findById(UUID idExpense) {
-        return iIncomeRepository.findById(idExpense);
+    public Optional<Income> findById(UUID idIncome) {
+        return iIncomeRepository.findById(idIncome);
     }
 
     @Override
-    public void save(Income expense) {
-        iIncomeRepository.save(expense);
+    public void save(Income income) {
+        iIncomeRepository.save(income);
     }
 
     @Override
-    public void deleteById(UUID idExpense) {
-        iIncomeRepository.deleteById(idExpense);
+    public void deleteById(UUID income) {
+        iIncomeRepository.deleteById(income);
     }
 }
