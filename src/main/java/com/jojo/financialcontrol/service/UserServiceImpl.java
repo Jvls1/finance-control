@@ -6,6 +6,7 @@ import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.repository.IUserRepository;
 import com.jojo.financialcontrol.utils.StringUtil;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,11 +30,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User save(User user) throws UserCreationException {
+    public void save(User user) {
         if (!StringUtil.isEmailValid(user.getEmail())) {
             throw new UserCreationException("Invalid Email");
         }
-        return iUserRepository.save(user);
+        iUserRepository.save(user);
     }
 
     @Override

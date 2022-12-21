@@ -5,6 +5,7 @@ import com.jojo.financialcontrol.entity.Income;
 import com.jojo.financialcontrol.response.ResponseHandler;
 import com.jojo.financialcontrol.service.IncomeServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class IncomeRestController {
             List<Income> incomes = incomeService.findAll();
             return new ResponseEntity<>(incomes, HttpStatus.OK);
         } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("Internal Error");
+            return ResponseEntity.internalServerError().body("Error");
         }
     }
 
@@ -47,11 +48,10 @@ public class IncomeRestController {
     @PostMapping("/incomes")
     public ResponseEntity<Object> save(@RequestBody Income incomeParam) {
         try {
-            incomeParam.setDateRegister(LocalDate.now());
             incomeService.save(incomeParam);
             return ResponseEntity.ok("Created");
         } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("Internal Error");
+            return ResponseEntity.internalServerError().body("Error");
         }
     }
 
@@ -60,8 +60,10 @@ public class IncomeRestController {
         try {
             incomeService.deleteById(idIncome);
             return ResponseEntity.ok("Deleted");
+        } catch (EmptyResultDataAccessException ex) {
+            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
         } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("Internal Error");
+            return ResponseEntity.internalServerError().body("Error");
         }
     }
 }

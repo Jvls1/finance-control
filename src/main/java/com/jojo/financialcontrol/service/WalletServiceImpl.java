@@ -26,8 +26,8 @@ public class WalletServiceImpl implements IWalletService {
     }
 
     @Override
-    public void save(Wallet expense) {
-        iWalletRepository.save(expense);
+    public void save(Wallet wallet) {
+        iWalletRepository.save(wallet);
     }
 
     @Override

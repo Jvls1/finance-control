@@ -1,18 +1,8 @@
 package com.jojo.financialcontrol.service;
 
 import com.jojo.financialcontrol.entity.Expense;
+import com.jojo.financialcontrol.service.generic.IGenericCrudService;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+public interface IExpenseService extends IGenericCrudService<Expense> {
 
-public interface IExpenseService {
-
-    List<Expense> findAll();
-
-    Optional<Expense> findById(UUID idExpense);
-
-    void save(Expense expense);
-
-    void deleteById(UUID idExpense);
 }

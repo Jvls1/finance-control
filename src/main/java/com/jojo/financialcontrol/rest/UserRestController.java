@@ -42,12 +42,11 @@ public class UserRestController {
             userService.save(user);
             return ResponseEntity.ok("Created");
         } catch (DataIntegrityViolationException ex) {
-            return ResponseEntity.internalServerError().body("This email address is registered with another account.");
+            return ResponseEntity.badRequest().body("This email address is registered with another account.");
         } catch (UserCreationException ex) {
             return ResponseEntity.badRequest().body("This is a invalid Email");
         } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("Internal Error");
+            return ResponseEntity.internalServerError().body("Error");
         }
-
     }
 }

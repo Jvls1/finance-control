@@ -18,7 +18,7 @@ import java.util.List;
 public class Wallet extends BaseEntity {
 
     @Column(name = "month", nullable = false)
-    @NotBlank
+    @NotBlank(message = "Month is mandatory")
     private LocalDate month;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -29,7 +29,7 @@ public class Wallet extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_user_owner", nullable = false)
-    @NotBlank
+    @NotBlank(message = "Wallet owner is mandatory")
     private User walletOwner;
 
     @ManyToOne

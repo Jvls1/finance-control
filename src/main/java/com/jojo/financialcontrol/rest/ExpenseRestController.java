@@ -5,10 +5,12 @@ import com.jojo.financialcontrol.entity.Expense;
 import com.jojo.financialcontrol.response.ResponseHandler;
 import com.jojo.financialcontrol.service.ExpenseServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -21,29 +23,47 @@ public class ExpenseRestController {
     private final ExpenseServiceImpl expenseService;
 
     @GetMapping("/expenses")
-    public List<Expense> findAll() {
-        return expenseService.findAll();
+    public ResponseEntity<Object> findAll() {
+        try {
+            List<Expense> expenses = expenseService.findAll();
+            return new ResponseEntity<>(expenses, HttpStatus.OK);
+        } catch (Exception ex) {
+            return ResponseEntity.internalServerError().body("Error");
+        }
     }
 
     @GetMapping("/expenses/{id}")
     public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idExpense) {
-        Optional<Expense> expense = expenseService.findById(idExpense);
-
-        return ResponseHandler.getResponse(expense);
+        try {
+            Optional<Expense> expense = expenseService.findById(idExpense);
+            if (expense.isEmpty()) {
+                return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(expense.get(), HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error");
+        }
     }
 
     @PostMapping("/expenses")
     public ResponseEntity<Object> save(@RequestBody Expense expenseParam) {
         try {
             expenseService.save(expenseParam);
-            return ResponseHandler.saveResponse("Created", HttpStatus.CREATED);
+            return ResponseEntity.ok("Created");
         } catch (Exception e) {
-            return ResponseHandler.saveResponse("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().body("Error");
         }
     }
 
     @DeleteMapping("/expenses/{id}")
-    public void deleteById(@PathVariable("id") UUID idExpense) {
-        expenseService.deleteById(idExpense);
+    public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idExpense) {
+        try {
+            expenseService.deleteById(idExpense);
+            return ResponseEntity.ok("Deleted");
+        } catch (EmptyResultDataAccessException ex) {
+            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+        } catch (Exception ex) {
+            return ResponseEntity.internalServerError().body("Error");
+        }
     }
 }
