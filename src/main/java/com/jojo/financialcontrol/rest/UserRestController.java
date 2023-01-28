@@ -1,44 +1,52 @@
 package com.jojo.financialcontrol.rest;
 
 
-import com.jojo.financialcontrol.entity.authentication.User;
-import com.jojo.financialcontrol.response.ResponseHandler;
-import com.jojo.financialcontrol.service.UserService;
+import com.jojo.financialcontrol.entity.User;
+import com.jojo.financialcontrol.exception.UserCreationException;
+import com.jojo.financialcontrol.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+
+import javax.validation.Valid;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
 public class UserRestController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
-    PasswordEncoder passwordEncoder;
-
-    @GetMapping("/login/{username}")
-    private ResponseEntity<Object> login(@PathVariable("username") String username) {
-
-        User user = userService.findByUsername(username);
-
-        return ResponseHandler.saveResponse(user);
-    }
-
-    @PostMapping("/register")
-    private ResponseEntity<Object> register(@RequestBody User userParam) {
-        if (userParam != null) {
-            if (userParam.getEmail() != null && userParam.getUsername() != null &&
-                    userParam.getPassword() != null) {
-
-                userParam.setPassword(passwordEncoder.encode(userParam.getPassword()));
-
-                userService.save(userParam);
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Object> findById(@PathVariable("id") UUID idUser) {
+        try {
+            Optional<User> user = userService.findById(idUser);
+            if (user.isEmpty()) {
+                return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
             }
+            return new ResponseEntity<>(user.get(), HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error");
         }
-        return ResponseHandler.saveResponse(userParam);
     }
 
-
+    @PostMapping("/user")
+    public ResponseEntity<Object> save(@Valid @RequestBody User user) {
+        try {
+            userService.save(user);
+            return ResponseEntity.ok("Created");
+        } catch (DataIntegrityViolationException ex) {
+            return ResponseEntity.badRequest().body("This email address is registered with another account.");
+        } catch (UserCreationException ex) {
+            return ResponseEntity.badRequest().body("This is a invalid Email");
+        } catch (Exception ex) {
+            return ResponseEntity.internalServerError().body("Error");
+        }
+    }
 }
