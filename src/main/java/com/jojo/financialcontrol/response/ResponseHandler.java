@@ -28,7 +28,7 @@ public class ResponseHandler {
     public static <T extends BaseEntity> ResponseEntity<Object> saveResponse(T entity) {
         if (entity != null) {
             return generateResponse(
-                    "Find!",
+                    "Save!",
                     HttpStatus.OK,
                     entity
             );

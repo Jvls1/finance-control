@@ -9,8 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-
 @Service
 public class UserService extends AGenericService<User> implements IUserService {
 
@@ -19,8 +17,16 @@ public class UserService extends AGenericService<User> implements IUserService {
         return new BCryptPasswordEncoder();
     }
 
-    protected UserService(IUserRepository userRepository) {
+    private final IUserRepository userRepository;
+
+    protected UserService(IUserRepository userRepository, IUserRepository userRepository1) {
         super(userRepository);
+        this.userRepository = userRepository1;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
 //    private IUserRepository userRepository;

@@ -1,22 +1,13 @@
 package com.jojo.financialcontrol.rest;
 
 
-import com.jojo.financialcontrol.entity.Expense;
 import com.jojo.financialcontrol.entity.authentication.User;
 import com.jojo.financialcontrol.response.ResponseHandler;
-import com.jojo.financialcontrol.service.ExpenseService;
 import com.jojo.financialcontrol.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -25,15 +16,18 @@ public class UserRestController {
 
     private final UserService userService;
 
-//    @GetMapping("/users")
-//    List<Expense> findAll() {
-//        return userService.findAll();
-//    }
-
     PasswordEncoder passwordEncoder;
 
-    @PostMapping("/users")
-    private ResponseEntity<Object> save(@RequestBody User userParam) {
+    @GetMapping("/login/{username}")
+    private ResponseEntity<Object> login(@PathVariable("username") String username) {
+
+        User user = userService.findByUsername(username);
+
+        return ResponseHandler.saveResponse(user);
+    }
+
+    @PostMapping("/register")
+    private ResponseEntity<Object> register(@RequestBody User userParam) {
         if (userParam != null) {
             if (userParam.getEmail() != null && userParam.getUsername() != null &&
                     userParam.getPassword() != null) {
@@ -45,7 +39,6 @@ public class UserRestController {
         }
         return ResponseHandler.saveResponse(userParam);
     }
-
 
 
 }

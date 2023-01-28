@@ -5,4 +5,5 @@ import com.jojo.financialcontrol.service.generic.IGenericService;
 
 public interface IUserService extends IGenericService<User> {
 
+    User findByUsername(String username);
 }
