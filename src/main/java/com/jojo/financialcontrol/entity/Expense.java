@@ -2,15 +2,11 @@ package com.jojo.financialcontrol.entity;
 
 import com.jojo.financialcontrol.entity.generic.BaseEntity;
 import com.jojo.financialcontrol.enums.EnumBuyMethod;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
