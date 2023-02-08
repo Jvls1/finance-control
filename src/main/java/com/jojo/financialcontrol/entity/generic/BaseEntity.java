@@ -1,11 +1,11 @@
 package com.jojo.financialcontrol.entity.generic;
 
 import com.jojo.financialcontrol.utils.UuidGenerator;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.UUID;
 

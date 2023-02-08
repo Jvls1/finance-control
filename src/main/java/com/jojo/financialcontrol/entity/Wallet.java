@@ -1,12 +1,12 @@
 package com.jojo.financialcontrol.entity;
 
 import com.jojo.financialcontrol.entity.generic.BaseEntity;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.List;
 
