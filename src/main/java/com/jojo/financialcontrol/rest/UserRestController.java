@@ -4,15 +4,13 @@ package com.jojo.financialcontrol.rest;
 import com.jojo.financialcontrol.entity.User;
 import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.service.UserServiceImpl;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
 
-import javax.validation.Valid;
 import java.util.Optional;
 import java.util.UUID;
 
