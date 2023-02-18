@@ -1,6 +1,6 @@
-package com.jojo.financialcontrol.entity;
+package com.jojo.financialcontrol.model;
 
-import com.jojo.financialcontrol.entity.generic.BaseEntity;
+import com.jojo.financialcontrol.model.generic.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

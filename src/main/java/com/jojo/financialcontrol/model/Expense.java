@@ -1,6 +1,7 @@
-package com.jojo.financialcontrol.entity;
+package com.jojo.financialcontrol.model;
 
-import com.jojo.financialcontrol.entity.generic.BaseEntity;
+import com.jojo.financialcontrol.model.generic.BaseEntity;
+import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -14,11 +15,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "income")
+@Table(name = "expense")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Income extends BaseEntity {
+public class Expense extends BaseEntity {
 
     @Column(name = "description", length = 100, nullable = false)
     @NotBlank(message = "Description is mandatory")
@@ -44,4 +45,7 @@ public class Income extends BaseEntity {
     @NotBlank(message = "Wallet is mandatory")
     private Wallet wallet;
 
+    @Column(name = "buy_method")
+    @Enumerated(EnumType.STRING)
+    private EnumBuyMethod enumBuyMethod;
 }

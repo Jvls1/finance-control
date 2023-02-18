@@ -1,6 +1,6 @@
 package com.jojo.financialcontrol.service;
 
-import com.jojo.financialcontrol.entity.Expense;
+import com.jojo.financialcontrol.model.Expense;
 import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import com.jojo.financialcontrol.repository.IExpenseRepository;
 import lombok.AllArgsConstructor;

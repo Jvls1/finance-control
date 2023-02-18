@@ -1,6 +1,6 @@
 package com.jojo.financialcontrol.service;
 
-import com.jojo.financialcontrol.entity.Income;
+import com.jojo.financialcontrol.model.Income;
 
 import java.util.List;
 import java.util.Optional;

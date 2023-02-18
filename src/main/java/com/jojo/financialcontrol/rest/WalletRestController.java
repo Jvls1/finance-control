@@ -1,7 +1,7 @@
 package com.jojo.financialcontrol.rest;
 
 
-import com.jojo.financialcontrol.entity.Wallet;
+import com.jojo.financialcontrol.model.Wallet;
 import com.jojo.financialcontrol.service.WalletServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;

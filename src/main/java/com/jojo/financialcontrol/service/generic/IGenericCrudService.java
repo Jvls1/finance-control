@@ -1,7 +1,6 @@
 package com.jojo.financialcontrol.service.generic;
 
-import com.jojo.financialcontrol.entity.Expense;
-import com.jojo.financialcontrol.entity.generic.BaseEntity;
+import com.jojo.financialcontrol.model.generic.BaseEntity;
 
 import java.util.List;
 import java.util.Optional;

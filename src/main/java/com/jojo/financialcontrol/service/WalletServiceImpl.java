@@ -1,6 +1,6 @@
 package com.jojo.financialcontrol.service;
 
-import com.jojo.financialcontrol.entity.Wallet;
+import com.jojo.financialcontrol.model.Wallet;
 import com.jojo.financialcontrol.repository.IWalletRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

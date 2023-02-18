@@ -1,12 +1,10 @@
 package com.jojo.financialcontrol.service;
 
-import com.jojo.financialcontrol.entity.User;
-import com.jojo.financialcontrol.entity.Wallet;
+import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.repository.IUserRepository;
 import com.jojo.financialcontrol.utils.StringUtil;
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

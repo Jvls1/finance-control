@@ -1,7 +1,7 @@
 package com.jojo.financialcontrol.rest;
 
 
-import com.jojo.financialcontrol.entity.User;
+import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.service.UserServiceImpl;
 import jakarta.validation.Valid;
