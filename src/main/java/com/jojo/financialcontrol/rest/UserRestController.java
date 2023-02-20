@@ -1,12 +1,12 @@
 package com.jojo.financialcontrol.rest;
 
 
-import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.exception.UserCreationException;
+import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.service.UserServiceImpl;
+import com.jojo.financialcontrol.to.UserCreationTO;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,16 +35,8 @@ public class UserRestController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<Object> save(@Valid @RequestBody User user) {
-        try {
-            userService.save(user);
-            return ResponseEntity.ok("Created");
-        } catch (DataIntegrityViolationException ex) {
-            return ResponseEntity.badRequest().body("This email address is registered with another account.");
-        } catch (UserCreationException ex) {
-            return ResponseEntity.badRequest().body("This is a invalid Email");
-        } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("Error");
-        }
+    public ResponseEntity<Object> save(@Valid @RequestBody UserCreationTO userCreationTO) throws UserCreationException {
+        userService.createUser(userCreationTO);
+        return ResponseEntity.ok("Created");
     }
 }

@@ -1,5 +1,6 @@
 package com.jojo.financialcontrol.service.generic;
 
+import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.model.generic.BaseEntity;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface IGenericCrudService<T extends BaseEntity> {
 
     Optional<T> findById(UUID idExpense);
 
-    void save(T expense);
+    void save(T expense) throws UserCreationException;
 
     void deleteById(UUID idExpense);
 }
