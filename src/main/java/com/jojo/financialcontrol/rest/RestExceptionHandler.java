@@ -1,5 +1,6 @@
 package com.jojo.financialcontrol.rest;
 
+import com.jojo.financialcontrol.exception.UserCreationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(value = {UserCreationException.class})
+    protected ResponseEntity<Object> handleUserCreation(RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = "Database error";
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
 
     @ExceptionHandler(value = {DataIntegrityViolationException.class})
     protected ResponseEntity<Object> handleDataIntegrityViolation(RuntimeException ex, WebRequest request) {
