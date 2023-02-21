@@ -16,7 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
-public class ExpenseRestController {
+public class ExpenseController {
 
     private final ExpenseServiceImpl expenseService;
 

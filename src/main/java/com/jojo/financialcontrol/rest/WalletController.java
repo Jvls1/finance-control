@@ -15,7 +15,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
-public class WalletRestController {
+public class WalletController {
 
     private final WalletServiceImpl walletService;
 

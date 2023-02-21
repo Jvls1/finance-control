@@ -16,6 +16,8 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.cors().disable().csrf().disable()
                 .authorizeHttpRequests()
+                .requestMatchers("/login").permitAll()
+                .anyRequest().authenticated()
                 .and().httpBasic();
         return http.build();
     }
