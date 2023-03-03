@@ -1,5 +1,6 @@
 package com.jojo.financialcontrol.controller;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,4 +17,14 @@ class UserControllerTests {
     @LocalServerPort
     int randomServerPort;
 
+
+    @Test
+    public void testFindById() {
+        //TODO: implement test
+    }
+
+    @Test
+    public void testSaveUser() {
+        //TODO: implement test
+    }
 }
