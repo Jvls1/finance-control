@@ -4,8 +4,10 @@ services:
 
   db:
     image: postgres
+    container_name: financial_control
     restart: always
     environment:
+      POSTGRES_USER: financial_control
       POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
