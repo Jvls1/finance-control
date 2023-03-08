@@ -58,7 +58,7 @@ class UserControllerTests extends BaseTest {
 
         ResponseEntity<String> result = restTemplate.exchange(requestUrl, HttpMethod.GET, request, String.class);
 
-        Assertions.assertEquals(201, result.getStatusCode().value());
+        Assertions.assertEquals(201, result.getStatusCode().value(), "User founded");
 
     }
 
