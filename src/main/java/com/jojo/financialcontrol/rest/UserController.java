@@ -23,15 +23,11 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public ResponseEntity<Object> findById(@PathVariable("id") UUID idUser) {
-        try {
-            Optional<User> user = userService.findById(idUser);
-            if (user.isEmpty()) {
-                return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(user.get(), HttpStatus.OK);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error");
+        Optional<User> user = userService.findById(idUser);
+        if (user.isEmpty()) {
+            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(user.get(), HttpStatus.OK);
     }
 
     @PostMapping("/user")
