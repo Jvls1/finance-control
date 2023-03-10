@@ -7,7 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
 import java.util.List;
 
 @Entity
@@ -19,12 +20,16 @@ public class Wallet extends BaseEntity {
 
     @Column(name = "month", nullable = false)
     @NotBlank(message = "Month is mandatory")
-    private LocalDate month;
+    private Month month;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Column(name = "year", nullable = false)
+    @NotBlank(message = "Year is mandatory")
+    private Year year;
+
+    @OneToMany(mappedBy = "wallet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Income> incomes;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "wallet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Expense> expenses;
 
     @ManyToOne

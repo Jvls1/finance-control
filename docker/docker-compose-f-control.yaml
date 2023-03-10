@@ -2,9 +2,11 @@ version: '3.1'
 
 services:
 
-  db:
+  financial-control-db:
     image: postgres
     container_name: financial_control
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
     restart: always
     environment:
       POSTGRES_USER: financial_control
