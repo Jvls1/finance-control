@@ -22,46 +22,28 @@ public class ExpenseController {
 
     @GetMapping("/expenses")
     public ResponseEntity<Object> findAll() {
-        try {
-            List<Expense> expenses = expenseService.findAll();
-            return new ResponseEntity<>(expenses, HttpStatus.OK);
-        } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("Error");
-        }
+        List<Expense> expenses = expenseService.findAll();
+        return new ResponseEntity<>(expenses, HttpStatus.OK);
     }
 
     @GetMapping("/expenses/{id}")
     public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idExpense) {
-        try {
-            Optional<Expense> expense = expenseService.findById(idExpense);
-            if (expense.isEmpty()) {
-                return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(expense.get(), HttpStatus.OK);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error");
+        Optional<Expense> expense = expenseService.findById(idExpense);
+        if (expense.isEmpty()) {
+            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(expense.get(), HttpStatus.OK);
     }
 
     @PostMapping("/expenses")
     public ResponseEntity<Object> save(@RequestBody Expense expenseParam) {
-        try {
-            expenseService.save(expenseParam);
-            return ResponseEntity.ok("Created");
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error");
-        }
+        expenseService.save(expenseParam);
+        return ResponseEntity.ok("Created");
     }
 
     @DeleteMapping("/expenses/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idExpense) {
-        try {
-            expenseService.deleteById(idExpense);
-            return ResponseEntity.ok("Deleted");
-        } catch (EmptyResultDataAccessException ex) {
-            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
-        } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("Error");
-        }
+        expenseService.deleteById(idExpense);
+        return ResponseEntity.ok("Deleted");
     }
 }

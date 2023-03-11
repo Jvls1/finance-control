@@ -22,46 +22,28 @@ public class IncomeController {
 
     @GetMapping("/incomes")
     public ResponseEntity<Object> findAll() {
-        try {
-            List<Income> incomes = incomeService.findAll();
-            return new ResponseEntity<>(incomes, HttpStatus.OK);
-        } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("Error");
-        }
+        List<Income> incomes = incomeService.findAll();
+        return new ResponseEntity<>(incomes, HttpStatus.OK);
     }
 
     @GetMapping("/incomes/{id}")
     public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idIncome) {
-        try {
-            Optional<Income> income = incomeService.findById(idIncome);
-            if (income.isEmpty()) {
-                return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(income.get(), HttpStatus.OK);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error");
+        Optional<Income> income = incomeService.findById(idIncome);
+        if (income.isEmpty()) {
+            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(income.get(), HttpStatus.OK);
     }
 
     @PostMapping("/incomes")
     public ResponseEntity<Object> save(@RequestBody Income incomeParam) {
-        try {
-            incomeService.save(incomeParam);
-            return ResponseEntity.ok("Created");
-        } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("Error");
-        }
+        incomeService.save(incomeParam);
+        return ResponseEntity.ok("Created");
     }
 
     @DeleteMapping("/incomes/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idIncome) {
-        try {
-            incomeService.deleteById(idIncome);
-            return ResponseEntity.ok("Deleted");
-        } catch (EmptyResultDataAccessException ex) {
-            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
-        } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("Error");
-        }
+        incomeService.deleteById(idIncome);
+        return ResponseEntity.ok("Deleted");
     }
 }

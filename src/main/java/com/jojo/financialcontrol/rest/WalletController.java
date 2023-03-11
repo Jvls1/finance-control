@@ -21,37 +21,23 @@ public class WalletController {
 
     @GetMapping("/wallets/{id}")
     public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idWallet) {
-        try {
-            Optional<Wallet> wallet = walletService.findById(idWallet);
-            if (wallet.isEmpty()) {
-                return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(wallet.get(), HttpStatus.OK);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error");
+        Optional<Wallet> wallet = walletService.findById(idWallet);
+        if (wallet.isEmpty()) {
+            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(wallet.get(), HttpStatus.OK);
 
     }
 
     @PostMapping("/wallets")
     public ResponseEntity<Object> save(@RequestBody Wallet walletParam) {
-        try {
-            walletService.save(walletParam);
-            return ResponseEntity.ok("Created");
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error");
-        }
+        walletService.save(walletParam);
+        return ResponseEntity.ok("Created");
     }
 
     @DeleteMapping("/wallets/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idIncome) {
-        try {
-            walletService.deleteById(idIncome);
-            return ResponseEntity.ok("Deleted");
-        } catch (EmptyResultDataAccessException ex) {
-            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
-        } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("Error");
-        }
+        walletService.deleteById(idIncome);
+        return ResponseEntity.ok("Deleted");
     }
 }
