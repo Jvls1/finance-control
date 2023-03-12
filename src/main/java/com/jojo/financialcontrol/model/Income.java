@@ -20,8 +20,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Income extends BaseEntity {
 
-    @Column(name = "description", length = 100, nullable = false)
-    @NotBlank(message = "Description is mandatory")
+    @Column(name = "description", length = 100)
     private String description;
 
     @Column(name = "amount", precision = 8, scale = 2, nullable = false)

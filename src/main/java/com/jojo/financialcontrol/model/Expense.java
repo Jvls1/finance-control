@@ -21,8 +21,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Expense extends BaseEntity {
 
-    @Column(name = "description", length = 100, nullable = false)
-    @NotBlank(message = "Description is mandatory")
+    @Column(name = "description", length = 100)
     private String description;
 
     @Column(name = "amount", precision = 8, scale = 2, nullable = false)
@@ -45,7 +44,8 @@ public class Expense extends BaseEntity {
     @NotBlank(message = "Wallet is mandatory")
     private Wallet wallet;
 
-    @Column(name = "buy_method")
+    @Column(name = "buy_method", nullable = false)
     @Enumerated(EnumType.STRING)
+    @NotBlank(message = "Buy method is mandatory")
     private EnumBuyMethod enumBuyMethod;
 }

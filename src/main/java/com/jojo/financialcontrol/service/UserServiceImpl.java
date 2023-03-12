@@ -6,6 +6,7 @@ import com.jojo.financialcontrol.repository.IUserRepository;
 import com.jojo.financialcontrol.to.UserCreationTO;
 import com.jojo.financialcontrol.utils.StringUtil;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements IUserService {
 
     private final IUserRepository iUserRepository;
@@ -55,4 +56,10 @@ public class UserServiceImpl implements IUserService {
     public void deleteById(UUID idUser) {
         iUserRepository.deleteById(idUser);
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return Optional.of(iUserRepository.findByEmail(email));
+    }
+
 }

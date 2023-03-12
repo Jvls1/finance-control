@@ -1,10 +1,11 @@
 package com.jojo.financialcontrol.rest;
 
 
+import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Expense;
 import com.jojo.financialcontrol.service.ExpenseServiceImpl;
+import com.jojo.financialcontrol.to.ExpenseCreationTO;
 import lombok.AllArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class ExpenseController {
     }
 
     @PostMapping("/expenses")
-    public ResponseEntity<Object> save(@RequestBody Expense expenseParam) {
+    public ResponseEntity<Object> save(@RequestBody ExpenseCreationTO expenseParam) throws InfoNotFoundException {
         expenseService.save(expenseParam);
         return ResponseEntity.ok("Created");
     }

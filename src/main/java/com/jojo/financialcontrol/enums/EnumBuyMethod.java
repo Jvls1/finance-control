@@ -9,7 +9,8 @@ public enum EnumBuyMethod {
 
     CREDIT_CARD("Credit Card"),
     DEBIT_CARD("Debit Card"),
-    CASH("Cash");
+    CASH("Cash"),
+    OTHER("Other");
 
     private final String description;
 
