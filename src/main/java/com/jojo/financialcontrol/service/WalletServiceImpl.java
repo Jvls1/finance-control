@@ -1,14 +1,12 @@
 package com.jojo.financialcontrol.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.model.Wallet;
 import com.jojo.financialcontrol.repository.IWalletRepository;
-import com.jojo.financialcontrol.to.WalletCreationTO;
+import com.jojo.financialcontrol.model.to.WalletCreationTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Optional;

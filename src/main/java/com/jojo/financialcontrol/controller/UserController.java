@@ -1,12 +1,12 @@
-package com.jojo.financialcontrol.rest;
+package com.jojo.financialcontrol.controller;
 
 
 import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.model.User;
+import com.jojo.financialcontrol.model.to.UserCreationTO;
 import com.jojo.financialcontrol.service.UserServiceImpl;
-import com.jojo.financialcontrol.to.UserCreationTO;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserServiceImpl userService;

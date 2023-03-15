@@ -1,4 +1,4 @@
-package com.jojo.financialcontrol.model.generic;
+package com.jojo.financialcontrol.model;
 
 import com.jojo.financialcontrol.utils.UuidGenerator;
 import jakarta.persistence.Column;

@@ -1,6 +1,5 @@
 package com.jojo.financialcontrol.model;
 
-import com.jojo.financialcontrol.model.generic.BaseEntity;
 import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMax;

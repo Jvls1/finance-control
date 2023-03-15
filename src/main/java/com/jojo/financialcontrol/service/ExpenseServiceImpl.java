@@ -1,12 +1,11 @@
 package com.jojo.financialcontrol.service;
 
-import com.jojo.financialcontrol.exception.AuthenticationNotFoundException;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Expense;
 import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import com.jojo.financialcontrol.model.Wallet;
 import com.jojo.financialcontrol.repository.IExpenseRepository;
-import com.jojo.financialcontrol.to.ExpenseCreationTO;
+import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

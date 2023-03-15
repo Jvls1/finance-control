@@ -1,4 +1,4 @@
-package com.jojo.financialcontrol.to;
+package com.jojo.financialcontrol.model.to;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

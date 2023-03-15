@@ -1,4 +1,4 @@
-package com.jojo.financialcontrol.rest;
+package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.exception.UserCreationException;
 import org.springframework.dao.DataIntegrityViolationException;

@@ -1,7 +1,7 @@
 package com.jojo.financialcontrol.service.generic;
 
 import com.jojo.financialcontrol.exception.UserCreationException;
-import com.jojo.financialcontrol.model.generic.BaseEntity;
+import com.jojo.financialcontrol.model.BaseEntity;
 
 import java.util.List;
 import java.util.Optional;

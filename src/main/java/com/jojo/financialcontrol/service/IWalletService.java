@@ -2,7 +2,7 @@ package com.jojo.financialcontrol.service;
 
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Wallet;
-import com.jojo.financialcontrol.to.WalletCreationTO;
+import com.jojo.financialcontrol.model.to.WalletCreationTO;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;

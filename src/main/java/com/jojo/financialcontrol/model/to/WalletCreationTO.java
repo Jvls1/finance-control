@@ -1,4 +1,4 @@
-package com.jojo.financialcontrol.to;
+package com.jojo.financialcontrol.model.to;
 
 import com.jojo.financialcontrol.model.Expense;
 import com.jojo.financialcontrol.model.Income;

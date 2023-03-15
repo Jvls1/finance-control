@@ -1,6 +1,5 @@
 package com.jojo.financialcontrol.model;
 
-import com.jojo.financialcontrol.model.generic.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;

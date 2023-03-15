@@ -1,6 +1,6 @@
 package com.jojo.financialcontrol.repository.generic;
 
-import com.jojo.financialcontrol.model.generic.BaseEntity;
+import com.jojo.financialcontrol.model.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

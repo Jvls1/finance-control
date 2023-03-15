@@ -1,10 +1,9 @@
-package com.jojo.financialcontrol.rest;
+package com.jojo.financialcontrol.controller;
 
 
 import com.jojo.financialcontrol.model.Income;
 import com.jojo.financialcontrol.service.IncomeServiceImpl;
-import lombok.AllArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class IncomeController {
 
     private final IncomeServiceImpl incomeService;

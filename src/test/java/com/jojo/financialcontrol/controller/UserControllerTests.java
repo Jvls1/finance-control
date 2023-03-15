@@ -2,7 +2,6 @@ package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.repository.IUserRepository;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,14 +14,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class UserControllerTests extends BaseTest {
+public class UserControllerTests extends BaseTest {
 
     @Autowired
     private TestRestTemplate restTemplate;

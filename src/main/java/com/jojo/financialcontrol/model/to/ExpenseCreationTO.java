@@ -1,8 +1,6 @@
-package com.jojo.financialcontrol.to;
+package com.jojo.financialcontrol.model.to;
 
-import com.jojo.financialcontrol.model.User;
-import com.jojo.financialcontrol.model.Wallet;
-import jakarta.persistence.*;
+import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
@@ -11,8 +9,6 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
 import java.util.UUID;
 
 @Getter
@@ -20,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class IncomeCreationTO {
+public class ExpenseCreationTO {
 
     private String description;
 
@@ -34,5 +30,8 @@ public class IncomeCreationTO {
 
     @NotBlank(message = "Wallet is mandatory")
     private UUID idWallet;
+
+    @NotBlank(message = "Buy method is mandatory")
+    private EnumBuyMethod enumBuyMethod;
 
 }
