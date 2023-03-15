@@ -5,6 +5,7 @@ import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.model.to.UserCreationTO;
 import com.jojo.financialcontrol.service.UserServiceImpl;
+import com.jojo.financialcontrol.utils.Routes;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,13 +16,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(Routes.USER)
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserServiceImpl userService;
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Object> findById(@PathVariable("id") UUID idUser) {
         Optional<User> user = userService.findById(idUser);
         if (user.isEmpty()) {
@@ -30,7 +31,7 @@ public class UserController {
         return new ResponseEntity<>(user.get(), HttpStatus.OK);
     }
 
-    @PostMapping("/user")
+    @PostMapping
     public ResponseEntity<Object> save(@Valid @RequestBody UserCreationTO userCreationTO) throws UserCreationException {
         userService.createUser(userCreationTO);
         return ResponseEntity.ok("Created");
