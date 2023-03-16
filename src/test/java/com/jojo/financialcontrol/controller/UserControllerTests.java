@@ -1,7 +1,9 @@
 package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.model.User;
+import com.jojo.financialcontrol.model.to.UserCreationTO;
 import com.jojo.financialcontrol.repository.IUserRepository;
+import com.jojo.financialcontrol.constants.Routes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -33,7 +35,7 @@ public class UserControllerTests extends BaseTest {
 
     @BeforeAll
     public void defaultTest() throws URISyntaxException {
-        loginTest();
+//        loginTest();
     }
 
     @Test
@@ -42,11 +44,11 @@ public class UserControllerTests extends BaseTest {
 
         User user = null;
 
+        Assertions.assertNotNull(users, "Need at least one User on DB.");
+
         if (users.size() > 0) {
             user = users.get(0);
         }
-
-        assert user != null;
 
         UUID id = user.getId();
 
@@ -62,6 +64,17 @@ public class UserControllerTests extends BaseTest {
 
     @Test
     public void testSaveUser() {
-        //TODO: implement test
+        final String requestUrl = "http://localhost:" + randomServerPort + Routes.USER;
+
+        UserCreationTO userCreationTO = new UserCreationTO();
+        userCreationTO.setName("jojo");
+        userCreationTO.setEmail("jojo@gmail.com");
+        userCreationTO.setPassword("12345678");
+
+        HttpEntity<Object> request = new HttpEntity<>(userCreationTO, getJwtAuthenticationHeader());
+
+        ResponseEntity<String> result = restTemplate.postForEntity(requestUrl, request, String.class);
+
+        Assertions.assertEquals(200, result.getStatusCode().value(), "User created Created");
     }
 }

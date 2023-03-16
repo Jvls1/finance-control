@@ -1,7 +1,7 @@
 package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.repository.IUserRepository;
-import com.jojo.financialcontrol.utils.Routes;
+import com.jojo.financialcontrol.constants.Routes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ExpenseControllerTest extends BaseTest {
 

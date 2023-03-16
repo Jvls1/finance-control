@@ -7,6 +7,8 @@ import com.jojo.financialcontrol.model.to.UserCreationTO;
 import com.jojo.financialcontrol.utils.StringUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,6 +19,8 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements IUserService {
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private final IUserRepository iUserRepository;
 
@@ -38,17 +42,18 @@ public class UserServiceImpl implements IUserService {
         iUserRepository.save(user);
     }
 
-    public void createUser(UserCreationTO userCreationTO) throws UserCreationException {
+    public User createUser(UserCreationTO userCreationTO) throws UserCreationException {
         if (!StringUtil.isEmailValid(userCreationTO.getEmail())) {
             throw new UserCreationException("Invalid Email");
         }
 
         User user = new User();
         BeanUtils.copyProperties(userCreationTO, user);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setTimeCreated(LocalDateTime.now());
         user.setTimeUpdate(LocalDateTime.now());
 
-        iUserRepository.save(user);
+        return iUserRepository.save(user);
     }
 
     @Override
@@ -58,7 +63,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return Optional.of(iUserRepository.findByEmail(email));
+        return iUserRepository.findByEmail(email);
     }
 
 }

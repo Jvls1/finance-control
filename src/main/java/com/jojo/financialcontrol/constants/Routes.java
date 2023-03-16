@@ -1,4 +1,4 @@
-package com.jojo.financialcontrol.utils;
+package com.jojo.financialcontrol.constants;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -11,5 +11,6 @@ public class Routes {
     public final static String INCOME = PREFIX+"/income";
     public final static String EXPENSE = PREFIX+"/expense";
     public final static String WALLET = PREFIX+"/wallet";
+    public final static String LOGIN = PREFIX+"/login";
 
 }

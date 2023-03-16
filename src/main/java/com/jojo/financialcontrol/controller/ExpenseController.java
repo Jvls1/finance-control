@@ -5,7 +5,7 @@ import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Expense;
 import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
 import com.jojo.financialcontrol.service.ExpenseServiceImpl;
-import com.jojo.financialcontrol.utils.Routes;
+import com.jojo.financialcontrol.constants.Routes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

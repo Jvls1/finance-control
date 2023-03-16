@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface IUserRepository extends IGenericRepository<User> {
 
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
 }

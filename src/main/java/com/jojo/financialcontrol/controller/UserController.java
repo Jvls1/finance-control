@@ -5,7 +5,7 @@ import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.model.to.UserCreationTO;
 import com.jojo.financialcontrol.service.UserServiceImpl;
-import com.jojo.financialcontrol.utils.Routes;
+import com.jojo.financialcontrol.constants.Routes;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,8 +32,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> save(@Valid @RequestBody UserCreationTO userCreationTO) throws UserCreationException {
-        userService.createUser(userCreationTO);
-        return ResponseEntity.ok("Created");
+    public ResponseEntity<User> save(@Valid @RequestBody UserCreationTO userCreationTO) throws UserCreationException {
+        User user = userService.createUser(userCreationTO);
+        return ResponseEntity.ok(user);
     }
 }
