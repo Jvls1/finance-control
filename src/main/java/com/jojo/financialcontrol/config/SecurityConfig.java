@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
-                .requestMatchers("/login").permitAll()
+                .requestMatchers(Routes.LOGIN).permitAll()
                 .requestMatchers(HttpMethod.POST, Routes.USER).permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic();

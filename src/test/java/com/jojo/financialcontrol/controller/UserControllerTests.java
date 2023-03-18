@@ -35,7 +35,7 @@ public class UserControllerTests extends BaseTest {
 
     @BeforeAll
     public void defaultTest() throws URISyntaxException {
-//        loginTest();
+        loginTest();
     }
 
     @Test

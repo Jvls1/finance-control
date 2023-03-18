@@ -1,5 +1,6 @@
 package com.jojo.financialcontrol.controller;
 
+import com.jojo.financialcontrol.constants.Routes;
 import lombok.Getter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,12 +30,11 @@ public class BaseTest {
 
     @Test
     public void loginTest() throws URISyntaxException {
-        final String baseUrl = "http://localhost:" + randomServerPort + "/api/login";
+        final String baseUrl = "http://localhost:" + randomServerPort + Routes.LOGIN;
         URI uri = new URI(baseUrl);
 
         HttpHeaders basicLoginHeader = new HttpHeaders();
 
-        // usuário de teste em encode em base64
         basicLoginHeader.add("Authorization", "Basic am/Do286MTIzNDU2Nzg=");
 
         HttpEntity<Object> request = new HttpEntity<>(basicLoginHeader);
