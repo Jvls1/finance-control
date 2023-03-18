@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class FinancialControlEmailPwdAuthenticationProvider implements AuthenticationProvider {
+public class FinancialControlAuthenticationProvider implements AuthenticationProvider {
 
     private final IUserRepository iUserRepository;
 
