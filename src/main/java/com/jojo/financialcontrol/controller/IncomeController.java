@@ -5,6 +5,7 @@ import com.jojo.financialcontrol.model.Income;
 import com.jojo.financialcontrol.service.IncomeServiceImpl;
 import com.jojo.financialcontrol.constants.Routes;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,8 @@ public class IncomeController {
     private final IncomeServiceImpl incomeService;
 
     @GetMapping
-    public ResponseEntity<Object> findAll() {
-        List<Income> incomes = incomeService.findAll();
-        return new ResponseEntity<>(incomes, HttpStatus.OK);
+    public ResponseEntity<Page<Income>> findAll(@RequestParam Integer page, @RequestParam Integer row) {
+        return new ResponseEntity<>(incomeService.findAll(page, row), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

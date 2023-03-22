@@ -3,6 +3,8 @@ package com.jojo.financialcontrol.service;
 import com.jojo.financialcontrol.model.Income;
 import com.jojo.financialcontrol.repository.IIncomeRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,8 +19,8 @@ public class IncomeServiceImpl implements IIncomeService {
     private final IIncomeRepository iIncomeRepository;
 
     @Override
-    public List<Income> findAll() {
-        return iIncomeRepository.findAll();
+    public Page<Income> findAll(Integer page, Integer row) {
+        return iIncomeRepository.findAll(PageRequest.of(page, row));
     }
 
     @Override

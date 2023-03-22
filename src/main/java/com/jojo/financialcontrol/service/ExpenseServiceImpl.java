@@ -7,6 +7,9 @@ import com.jojo.financialcontrol.model.Wallet;
 import com.jojo.financialcontrol.repository.IExpenseRepository;
 import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,8 +28,8 @@ public class ExpenseServiceImpl implements IExpenseService {
     private final WalletServiceImpl walletService;
 
     @Override
-    public List<Expense> findAll() {
-        return iExpenseRepository.findAll();
+    public Page<Expense> findAll(Integer page, Integer row) {
+        return iExpenseRepository.findAll(PageRequest.of(page, row));
     }
 
     @Override
@@ -48,7 +51,7 @@ public class ExpenseServiceImpl implements IExpenseService {
         expense.setDateRegister(LocalDate.now());
         expense.setUser(sessionService.sessionUser());
         Optional<Wallet> walletOptional = walletService.findById(expenseCreationTO.getIdWallet());
-        if(walletOptional.isEmpty()) {
+        if (walletOptional.isEmpty()) {
             throw new InfoNotFoundException("Wallet not found");
         }
         expense.setWallet(walletOptional.get());

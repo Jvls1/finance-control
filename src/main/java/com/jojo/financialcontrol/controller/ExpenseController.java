@@ -7,6 +7,7 @@ import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
 import com.jojo.financialcontrol.service.ExpenseServiceImpl;
 import com.jojo.financialcontrol.constants.Routes;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,8 @@ public class ExpenseController {
     private final ExpenseServiceImpl expenseService;
 
     @GetMapping
-    public ResponseEntity<Object> findAll() {
-        List<Expense> expenses = expenseService.findAll();
-        return new ResponseEntity<>(expenses, HttpStatus.OK);
+    public ResponseEntity<Page<Expense>> findAll(@RequestParam Integer page, @RequestParam Integer row) {
+        return new ResponseEntity<>(expenseService.findAll(page, row), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

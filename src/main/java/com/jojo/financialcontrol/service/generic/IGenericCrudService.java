@@ -2,6 +2,7 @@ package com.jojo.financialcontrol.service.generic;
 
 import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.model.BaseEntity;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +10,7 @@ import java.util.UUID;
 
 public interface IGenericCrudService<T extends BaseEntity> {
 
-    List<T> findAll();
+    Page<T> findAll(Integer page, Integer row);
 
     Optional<T> findById(UUID idExpense);
 

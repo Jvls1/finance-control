@@ -6,6 +6,8 @@ import com.jojo.financialcontrol.model.Wallet;
 import com.jojo.financialcontrol.repository.IWalletRepository;
 import com.jojo.financialcontrol.model.to.WalletCreationTO;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class WalletServiceImpl implements IWalletService {
     private final IUserService iUserService;
 
     @Override
-    public List<Wallet> findAll() {
-        return iWalletRepository.findAll();
+    public Page<Wallet> findAll(Integer page, Integer row) {
+        return iWalletRepository.findAll(PageRequest.of(page, row));
     }
 
     @Override

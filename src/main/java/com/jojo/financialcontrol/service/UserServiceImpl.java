@@ -1,18 +1,18 @@
 package com.jojo.financialcontrol.service;
 
-import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.exception.UserCreationException;
-import com.jojo.financialcontrol.repository.IUserRepository;
+import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.model.to.UserCreationTO;
+import com.jojo.financialcontrol.repository.IUserRepository;
 import com.jojo.financialcontrol.utils.StringUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,8 +25,8 @@ public class UserServiceImpl implements IUserService {
     private final IUserRepository iUserRepository;
 
     @Override
-    public List<User> findAll() {
-        return iUserRepository.findAll();
+    public Page<User> findAll(Integer page, Integer rows) {
+        return iUserRepository.findAll(PageRequest.of(page, rows));
     }
 
     @Override
