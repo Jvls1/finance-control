@@ -2,9 +2,10 @@ package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.constants.Routes;
 import com.jojo.financialcontrol.enums.EnumBuyMethod;
+import com.jojo.financialcontrol.model.Expense;
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
-import com.jojo.financialcontrol.repository.IUserRepository;
+import com.jojo.financialcontrol.repository.IExpenseRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ExpenseControllerTest extends BaseTest {
     int randomServerPort;
 
     @Autowired
-    private IUserRepository iUserRepository;
+    private IExpenseRepository iExpenseRepository;
 
     @Test
     void findAll() {
@@ -41,11 +42,11 @@ public class ExpenseControllerTest extends BaseTest {
 
     @Test
     void getExpenseById() {
-        List<User> users = iUserRepository.findAll();
-        User user = users.get(0);
-        Assertions.assertNotNull(user);
+        List<Expense> expenses = iExpenseRepository.findAll();
+        Expense expense = expenses.get(0);
+        Assertions.assertNotNull(expense);
 
-        final String requestUrl = "http://localhost:" + randomServerPort + Routes.EXPENSE + "/" + user.getId();
+        final String requestUrl = "http://localhost:" + randomServerPort + Routes.EXPENSE + "/" + expense.getId();
 
         HttpEntity<Object> request = new HttpEntity<>(getJwtAuthenticationHeader());
 
@@ -76,11 +77,11 @@ public class ExpenseControllerTest extends BaseTest {
 
     @Test
     void deleteById() {
-        List<User> users = iUserRepository.findAll();
-        User user = users.get(0);
-        Assertions.assertNotNull(user);
+        List<Expense> expenses = iExpenseRepository.findAll();
+        Expense expense = expenses.get(0);
+        Assertions.assertNotNull(expense);
 
-        final String requestUrl = "http://localhost:" + randomServerPort + Routes.EXPENSE + "/" + user.getId();
+        final String requestUrl = "http://localhost:" + randomServerPort + Routes.EXPENSE + "/" + expense.getId();
 
         HttpEntity<Object> request = new HttpEntity<>(getJwtAuthenticationHeader());
 
