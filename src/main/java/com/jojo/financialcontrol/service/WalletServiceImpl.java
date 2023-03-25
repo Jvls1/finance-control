@@ -22,9 +22,15 @@ public class WalletServiceImpl implements IWalletService {
 
     private final IUserService iUserService;
 
+    private final SessionService sessionService;
+
     @Override
     public Page<Wallet> findAll(Integer page, Integer row) {
         return iWalletRepository.findAll(PageRequest.of(page, row));
+    }
+
+    public List<Wallet> findAllUser() {
+        return iWalletRepository.findAllByIdUser(sessionService.sessionUser().getId());
     }
 
     @Override

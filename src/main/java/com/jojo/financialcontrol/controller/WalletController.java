@@ -21,9 +21,19 @@ public class WalletController {
 
     private final WalletServiceImpl walletService;
 
+    @GetMapping()
+    public ResponseEntity<Object> getWalletAll() {
+        Optional<Wallet> wallet = walletService.findById(idWallet);
+        if (wallet.isEmpty()) {
+            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(wallet.get(), HttpStatus.OK);
+
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> getWalletById(@PathVariable("id") UUID idWallet) {
-        Optional<Wallet> wallet = walletService.findById(idWallet);
+        Optional<Wallet> wallet = walletService.findAll(idWallet);
         if (wallet.isEmpty()) {
             return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
         }
