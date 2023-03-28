@@ -50,15 +50,17 @@ public class WalletServiceImpl implements IWalletService {
         if (userOwnerOptional.isEmpty()) {
             throw new InfoNotFoundException("Owner user dont exists");
         }
-        Optional<User> userCollaboratorOptional = iUserService.findById(walletCreationTO.getIdWalletCollaborator());
-        if (userCollaboratorOptional.isEmpty()) {
-            throw new InfoNotFoundException("Collaborator user dont exists");
+        if (walletCreationTO.getIdWalletCollaborator() != null) {
+            Optional<User> userCollaboratorOptional = iUserService.findById(walletCreationTO.getIdWalletCollaborator());
+            if (userCollaboratorOptional.isEmpty()) {
+                throw new InfoNotFoundException("Collaborator user dont exists");
+            }
+            wallet.setWalletCollaborator(userCollaboratorOptional.get());
         }
         wallet.setMonth(walletCreationTO.getMonth());
         wallet.setYear(walletCreationTO.getYear());
 
         wallet.setWalletOwner(userOwnerOptional.get());
-        wallet.setWalletCollaborator(userCollaboratorOptional.get());
         iWalletRepository.save(wallet);
     }
 
