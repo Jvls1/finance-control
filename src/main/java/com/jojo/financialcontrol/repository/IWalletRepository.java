@@ -10,5 +10,5 @@ import java.util.UUID;
 @Repository
 public interface IWalletRepository extends IGenericRepository<Wallet> {
 
-    List<Wallet> findAllByIdUser(UUID idUser);
+    List<Wallet> findAllByWalletOwnerId(UUID idUserOwner);
 }

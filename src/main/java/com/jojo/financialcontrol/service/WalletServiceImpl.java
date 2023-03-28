@@ -29,8 +29,8 @@ public class WalletServiceImpl implements IWalletService {
         return iWalletRepository.findAll(PageRequest.of(page, row));
     }
 
-    public List<Wallet> findAllUser() {
-        return iWalletRepository.findAllByIdUser(sessionService.sessionUser().getId());
+    public List<Wallet> findAllWalletsOwner() {
+        return iWalletRepository.findAllByWalletOwnerId(sessionService.sessionUser().getId());
     }
 
     @Override
