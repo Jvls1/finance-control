@@ -33,11 +33,6 @@ public class Income extends BaseEntity {
     private LocalDate dateRegister;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_user", nullable = false)
-    @NotBlank(message = "User is mandatory")
-    private User user;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_wallet", nullable = false)
     @NotBlank(message = "Wallet is mandatory")
     private Wallet wallet;
