@@ -1,0 +1,31 @@
+Ideia do projeto:
+
+Armazenar os gastos e ganhos mensais, dividos por agrupadores mensais chamados de carteira,
+esse agrupador obrigatoriamente precisa de um usuário dono vinculado, o mesmo pode adicionar
+um colaborador para sua carteira caso deseje, exemplo: um casal deseja usar juntos e usar uma
+carteira em comum;
+
+Uma despesa e uma renda precisam obrigatoriamente de uma carteira vinculada.
+
+Endpoints necessários:
+
+User
+
+- registrar um usuário. OK
+- pegar um usuário. OK
+- atualizar um usuário. NÃO
+- desativar um usuário. OK
+
+Expense e Income
+- Registrar
+- Atualizar
+- Excluir
+- Pegar por carteira
+
+Wallet
+- Criar
+- Atualizar
+- Excluir
+- Adicionar usuário
+- Adicionar colaborador
+- Remover colaborador

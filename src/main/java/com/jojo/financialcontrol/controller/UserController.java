@@ -1,11 +1,12 @@
 package com.jojo.financialcontrol.controller;
 
 
+import com.jojo.financialcontrol.constants.Routes;
+import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.model.to.UserCreationTO;
 import com.jojo.financialcontrol.service.UserServiceImpl;
-import com.jojo.financialcontrol.constants.Routes;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,10 +24,10 @@ public class UserController {
     private final UserServiceImpl userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> findById(@PathVariable("id") UUID idUser) {
+    public ResponseEntity<User> findById(@PathVariable("id") UUID idUser) throws InfoNotFoundException {
         Optional<User> user = userService.findById(idUser);
         if (user.isEmpty()) {
-            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+            throw new InfoNotFoundException("User not founded");
         }
         return new ResponseEntity<>(user.get(), HttpStatus.OK);
     }
@@ -35,5 +36,11 @@ public class UserController {
     public ResponseEntity<User> save(@Valid @RequestBody UserCreationTO userCreationTO) throws UserCreationException {
         User user = userService.createUser(userCreationTO);
         return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteUser(@PathVariable("id") UUID idUser) throws InfoNotFoundException {
+        userService.deleteById(idUser);
+        return ResponseEntity.ok("Deleted");
     }
 }

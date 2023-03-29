@@ -1,5 +1,6 @@
 package com.jojo.financialcontrol.service;
 
+import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.model.to.UserCreationTO;
@@ -42,6 +43,7 @@ public class UserServiceImpl implements IUserService {
         iUserRepository.save(user);
     }
 
+    @Override
     public User createUser(UserCreationTO userCreationTO) throws UserCreationException {
         if (!StringUtil.isEmailValid(userCreationTO.getEmail())) {
             throw new UserCreationException("Invalid Email");
@@ -57,8 +59,18 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void deleteById(UUID idUser) {
-        iUserRepository.deleteById(idUser);
+    public User updateUser(UUID idUser) {
+//        TODO: think the best impl to update a user...
+        throw new UnsupportedOperationException("Update user not working...");
+    }
+
+    @Override
+    public void deleteById(UUID idUser) throws InfoNotFoundException {
+        boolean existsById = iUserRepository.existsById(idUser);
+        if(!existsById) {
+            throw new InfoNotFoundException("User not found");
+        }
+        iUserRepository.deactivateUser(idUser);
     }
 
     @Override

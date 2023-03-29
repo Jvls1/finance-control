@@ -1,5 +1,6 @@
 package com.jojo.financialcontrol.service.generic;
 
+import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.model.BaseEntity;
 import org.springframework.data.domain.Page;
@@ -16,5 +17,5 @@ public interface IGenericCrudService<T extends BaseEntity> {
 
     void save(T expense) throws UserCreationException;
 
-    void deleteById(UUID idExpense);
+    void deleteById(UUID idExpense) throws InfoNotFoundException;
 }
