@@ -22,7 +22,7 @@ public class WalletServiceImpl implements IWalletService {
 
     private final IUserService iUserService;
 
-    private final SessionService sessionService;
+    private final ISessionService sessionService;
 
     @Override
     public Page<Wallet> findAll(Integer page, Integer row) {

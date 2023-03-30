@@ -13,7 +13,7 @@ public interface IGenericCrudService<T extends BaseEntity> {
 
     Page<T> findAll(Integer page, Integer row);
 
-    Optional<T> findById(UUID idExpense);
+    Optional<T> findById(UUID idEntity);
 
     void save(T expense) throws UserCreationException;
 

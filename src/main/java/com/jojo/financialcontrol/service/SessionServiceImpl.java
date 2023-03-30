@@ -1,7 +1,6 @@
 package com.jojo.financialcontrol.service;
 
 import com.jojo.financialcontrol.exception.AuthenticationNotFoundException;
-import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -14,7 +13,7 @@ import java.util.Optional;
 @SessionScope
 @Service
 @RequiredArgsConstructor
-public class SessionServiceImpl implements SessionService {
+public class SessionServiceImpl implements ISessionService {
 
     private final IUserService iUserService;
 
