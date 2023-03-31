@@ -43,10 +43,9 @@ public class IncomeServiceImpl implements IIncomeService {
     @Override
     public void save(IncomeCreationTO incomeCreationTO) throws InfoNotFoundException {
         Optional<Wallet> walletOptional = iWalletService.findById(incomeCreationTO.getIdWallet());
-
-        if (walletOptional.isEmpty())
+        if (walletOptional.isEmpty()) {
             throw new InfoNotFoundException("Wallet not found");
-
+        }
         Income income = new Income();
         income.setDescription(incomeCreationTO.getDescription());
         income.setAmount(incomeCreationTO.getAmount());

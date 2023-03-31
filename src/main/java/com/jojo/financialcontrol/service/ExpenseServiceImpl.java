@@ -1,19 +1,17 @@
 package com.jojo.financialcontrol.service;
 
+import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Expense;
-import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import com.jojo.financialcontrol.model.Wallet;
-import com.jojo.financialcontrol.repository.IExpenseRepository;
 import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
+import com.jojo.financialcontrol.repository.IExpenseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,12 +27,12 @@ public class ExpenseServiceImpl implements IExpenseService {
 
     @Override
     public Page<Expense> findAll(Integer page, Integer row) {
-        return iExpenseRepository.findAll(PageRequest.of(page, row));
+        return iExpenseRepository.findAllByWalletWalletOwnerId(PageRequest.of(page, row), sessionService.sessionUser().getId());
     }
 
     @Override
     public Optional<Expense> findById(UUID idExpense) {
-        return iExpenseRepository.findById(idExpense);
+        return iExpenseRepository.findByIdAndWalletWalletOwnerId(idExpense, sessionService.sessionUser().getId());
     }
 
     @Override
@@ -53,9 +51,9 @@ public class ExpenseServiceImpl implements IExpenseService {
         Expense expense = new Expense();
         expense.setDescription(expenseCreationTO.getDescription());
         expense.setDateRegister(LocalDate.now());
-        expense.setUser(sessionService.sessionUser());
         expense.setWallet(walletOptional.get());
         expense.setEnumBuyMethod(expenseCreationTO.getEnumBuyMethod());
+
         iExpenseRepository.save(expense);
     }
 
