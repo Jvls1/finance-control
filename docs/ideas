@@ -17,10 +17,10 @@ User
 - desativar um usuário. OK
 
 Expense e Income
-- Registrar
-- Atualizar
-- Excluir
-- Pegar por carteira
+- Registrar OK
+- Atualizar OK
+- Excluir OK
+- Pegar por carteira e usuario OK
 
 Wallet
 - Criar

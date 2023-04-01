@@ -68,4 +68,17 @@ public class WalletServiceImpl implements IWalletService {
     public void deleteById(UUID idWallet) {
         iWalletRepository.deleteById(idWallet);
     }
+
+    public void addCollaboratorToWallet(UUID idWallet, UUID idUser) throws InfoNotFoundException {
+        Optional<Wallet> walletOptional = iWalletRepository.findById(idWallet);
+        if (walletOptional.isEmpty()) {
+            throw new InfoNotFoundException("Wallet not found");
+        }
+        Optional<User> userOptional = iUserService.findById(idUser);
+        if (userOptional.isEmpty()) {
+            throw new InfoNotFoundException("User not found");
+        }
+        walletOptional.get().setWalletCollaborator(userOptional.get());
+        save(walletOptional.get());
+    }
 }

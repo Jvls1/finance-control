@@ -48,6 +48,13 @@ public class WalletController {
         return ResponseEntity.ok("Created");
     }
 
+    @PostMapping("/collaborator")
+    public ResponseEntity<Object> addCollaboratorToWallet(@RequestParam UUID idWallet, @RequestParam UUID idUser)
+            throws InfoNotFoundException {
+        walletService.addCollaboratorToWallet(idWallet, idUser);
+        return ResponseEntity.ok("Add");
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idIncome) {
         walletService.deleteById(idIncome);
