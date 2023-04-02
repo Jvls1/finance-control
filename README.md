@@ -3,8 +3,10 @@
 Project designed to store monthly expenses and have better control over your money.
 
 Techs:
+ - Java 17
  - SpringBoot
+ - Spring Security
  - Postgresql
  - Docker
- - JWT and OAuth2
- - Postman (to test the routes)
+ - JWT
+ - JUnit
