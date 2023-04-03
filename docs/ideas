@@ -23,9 +23,11 @@ Expense e Income
 - Pegar por carteira e usuario OK
 
 Wallet
-- Criar
+- Encontrar todas. OK
+- Encontrar por dono da carteira. OK
+- Criar - OK
 - Atualizar
-- Excluir
+- Excluir -
 - Adicionar usuário
 - Adicionar colaborador
 - Remover colaborador

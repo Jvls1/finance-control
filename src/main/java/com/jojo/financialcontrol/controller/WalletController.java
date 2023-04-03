@@ -8,6 +8,7 @@ import com.jojo.financialcontrol.service.WalletServiceImpl;
 import com.jojo.financialcontrol.constants.Routes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class WalletController {
 
     @GetMapping()
     public ResponseEntity<Page<Wallet>> getWalletAll(@RequestParam Integer page, @RequestParam Integer row) throws InfoNotFoundException {
-        Page<Wallet> walletPage = walletService.findAll(page, row);
+        Page<Wallet> walletPage = walletService.findAllWalletsByOwner(PageRequest.of(page, row));
         if (walletPage.isEmpty()) {
             throw new InfoNotFoundException("Wallet not found");
         }
@@ -42,6 +43,15 @@ public class WalletController {
 
     }
 
+    @GetMapping("/owner/{id}")
+    public ResponseEntity<Wallet> getWalletByOwnerId(@PathVariable("id") UUID idWallet) throws InfoNotFoundException {
+        Optional<Wallet> walletOptional = walletService.findByWalletOwnerId(idWallet);
+        if(walletOptional.isEmpty()) {
+            throw new InfoNotFoundException("Wallet not found");
+        }
+        return new ResponseEntity<>(walletOptional.get(), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Object> save(@RequestBody WalletCreationTO walletParam) throws InfoNotFoundException {
         walletService.save(walletParam);
@@ -56,8 +66,8 @@ public class WalletController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idIncome) {
-        walletService.deleteById(idIncome);
+    public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idWallet) {
+        walletService.deleteById(idWallet);
         return ResponseEntity.ok("Deleted");
     }
 }

@@ -8,9 +8,9 @@ import com.jojo.financialcontrol.model.to.WalletCreationTO;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,8 +29,8 @@ public class WalletServiceImpl implements IWalletService {
         return iWalletRepository.findAll(PageRequest.of(page, row));
     }
 
-    public List<Wallet> findAllWalletsOwner() {
-        return iWalletRepository.findAllByWalletOwnerId(sessionService.sessionUser().getId());
+    public Page<Wallet> findAllWalletsByOwner(Pageable pageable) {
+        return iWalletRepository.findAllByWalletOwnerId(pageable, sessionService.sessionUser().getId());
     }
 
     @Override
@@ -81,4 +81,9 @@ public class WalletServiceImpl implements IWalletService {
         walletOptional.get().setWalletCollaborator(userOptional.get());
         save(walletOptional.get());
     }
+
+    public Optional<Wallet> findByWalletOwnerId(UUID idUser) {
+        return iWalletRepository.findByWalletOwnerId(idUser);
+    }
+
 }
