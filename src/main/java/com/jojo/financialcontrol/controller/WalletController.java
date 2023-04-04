@@ -70,4 +70,11 @@ public class WalletController {
         walletService.deleteById(idWallet);
         return ResponseEntity.ok("Deleted");
     }
+
+    @DeleteMapping("/collaborator")
+    public ResponseEntity<Object> removeCollaboratorFromWallet(@RequestParam UUID idWallet, @RequestParam UUID idUser)
+            throws InfoNotFoundException {
+        walletService.addCollaboratorToWallet(idWallet, idUser);
+        return ResponseEntity.ok("Add");
+    }
 }
