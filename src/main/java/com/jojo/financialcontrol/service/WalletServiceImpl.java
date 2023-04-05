@@ -91,7 +91,7 @@ public class WalletServiceImpl implements IWalletService {
         if (userOptional.isEmpty()) {
             throw new InfoNotFoundException("User not found");
         }
-        iWalletRepository.removeWalletCollaboratorByUserId(idUser);
+        iWalletRepository.removeWalletCollaboratorByWalletIdAndUserId(idWallet, idUser);
     }
 
     public Optional<Wallet> findByWalletOwnerId(UUID idUser) {

@@ -74,7 +74,7 @@ public class WalletController {
     @DeleteMapping("/collaborator")
     public ResponseEntity<Object> removeCollaboratorFromWallet(@RequestParam UUID idWallet, @RequestParam UUID idUser)
             throws InfoNotFoundException {
-        walletService.addCollaboratorToWallet(idWallet, idUser);
+        walletService.removeCollaboratorFromWallet(idWallet, idUser);
         return ResponseEntity.ok("Add");
     }
 }
