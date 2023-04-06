@@ -38,6 +38,12 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUserById(@PathVariable("id") UUID idUser, @RequestBody UserCreationTO userCreationTO) throws Exception {
+        User user = userService.updateUser(idUser, userCreationTO);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
     @DeleteMapping
     public ResponseEntity<String> deleteUser(@PathVariable("id") UUID idUser) throws InfoNotFoundException {
         userService.deleteById(idUser);

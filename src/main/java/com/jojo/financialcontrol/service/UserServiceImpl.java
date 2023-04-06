@@ -58,8 +58,28 @@ public class UserServiceImpl implements IUserService {
         return iUserRepository.save(user);
     }
 
-    @Override
-    public User updateUser(UUID idUser) {
+    public User updateUser(UUID idUser, UserCreationTO userCreationTO) throws Exception {
+        Optional<User> userOptional = iUserRepository.findById(idUser);
+        if (userOptional.isEmpty()) {
+            throw new InfoNotFoundException("User not found");
+        }
+        if (userCreationTO == null) {
+            //TODO: change for a specific Exception
+            throw new Exception("Need the creation object");
+        }
+        User user = userOptional.get();
+        if (userCreationTO.getEmail() != null) {
+            if (!StringUtil.isEmailValid(userCreationTO.getEmail())) {
+                throw new UserCreationException("Invalid Email");
+            }
+            user.setEmail(userCreationTO.getEmail());
+        }
+        if (userCreationTO.getName() != null) {
+            user.setName(userCreationTO.getName());
+        }
+        if (userCreationTO.getPassword() != null) {
+            user.setPassword(bCryptPasswordEncoder.encode(userCreationTO.getPassword()));
+        }
 //        TODO: think the best impl to update a user...
         throw new UnsupportedOperationException("Update user not working...");
     }
@@ -67,7 +87,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void deleteById(UUID idUser) throws InfoNotFoundException {
         boolean existsById = iUserRepository.existsById(idUser);
-        if(!existsById) {
+        if (!existsById) {
             throw new InfoNotFoundException("User not found");
         }
         iUserRepository.deactivateUser(idUser);

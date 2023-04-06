@@ -15,5 +15,6 @@ public interface IUserService extends IGenericCrudService<User> {
 
     User createUser(UserCreationTO userCreationTO) throws UserCreationException;
 
-    User updateUser(UUID idUser) throws UserCreationException, InfoNotFoundException;
+    //TODO: change de UserCreationTO to other Class
+    User updateUser(UUID idUser, UserCreationTO userCreationTO) throws Exception;
 }
