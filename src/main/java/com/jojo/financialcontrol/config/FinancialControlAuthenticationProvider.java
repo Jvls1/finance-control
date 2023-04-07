@@ -3,6 +3,7 @@ package com.jojo.financialcontrol.config;
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,9 +18,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class FinancialControlAuthenticationProvider implements AuthenticationProvider {
 
-    private final IUserRepository iUserRepository;
+    @Autowired
+    private IUserRepository iUserRepository;
 
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

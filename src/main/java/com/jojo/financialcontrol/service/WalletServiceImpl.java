@@ -3,9 +3,9 @@ package com.jojo.financialcontrol.service;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.model.Wallet;
-import com.jojo.financialcontrol.repository.IWalletRepository;
 import com.jojo.financialcontrol.model.to.WalletCreationTO;
-import lombok.AllArgsConstructor;
+import com.jojo.financialcontrol.repository.IWalletRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class WalletServiceImpl implements IWalletService {
 
     private final IWalletRepository iWalletRepository;
@@ -30,7 +30,7 @@ public class WalletServiceImpl implements IWalletService {
     }
 
     public Page<Wallet> findAllWalletsByOwner(Pageable pageable) {
-        return iWalletRepository.findAllByWalletOwnerId(pageable, sessionService.sessionUser().getId());
+        return iWalletRepository.findAllByWalletOwnerIdOrWalletCollaboratorId(pageable, sessionService.sessionUser().getId());
     }
 
     @Override

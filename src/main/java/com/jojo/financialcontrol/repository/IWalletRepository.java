@@ -14,7 +14,14 @@ import java.util.UUID;
 @Repository
 public interface IWalletRepository extends IGenericRepository<Wallet> {
 
-    Page<Wallet> findAllByWalletOwnerId(Pageable page, UUID idUserOwner);
+    @Query("""
+            select w
+              from Wallet w
+             where 1=1 
+               and w.walletOwner.id = :idUser
+                or w.walletCollaborator.id = :idUser
+            """)
+    Page<Wallet> findAllByWalletOwnerIdOrWalletCollaboratorId(Pageable page, UUID idUser);
 
     Optional<Wallet> findByWalletOwnerId(UUID idUserOwner);
 
@@ -25,5 +32,5 @@ public interface IWalletRepository extends IGenericRepository<Wallet> {
              where w.id = :idWallet 
                and w.walletCollaborator.id = :idUserCollaborator
              """)
-    void removeWalletCollaboratorByWalletIdAndUserId(UUID idWallet,UUID idUserCollaborator);
+    void removeWalletCollaboratorByWalletIdAndUserId(UUID idWallet, UUID idUserCollaborator);
 }

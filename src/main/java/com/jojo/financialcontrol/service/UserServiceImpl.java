@@ -90,7 +90,7 @@ public class UserServiceImpl implements IUserService {
         if (!existsById) {
             throw new InfoNotFoundException("User not found");
         }
-        iUserRepository.deactivateUser(idUser);
+        iUserRepository.deactivateUserByUserId(idUser);
     }
 
     @Override
