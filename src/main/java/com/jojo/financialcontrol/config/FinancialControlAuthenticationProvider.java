@@ -1,7 +1,7 @@
 package com.jojo.financialcontrol.config;
 
 import com.jojo.financialcontrol.model.User;
-import com.jojo.financialcontrol.repository.IUserRepository;
+import com.jojo.financialcontrol.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -18,18 +18,16 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class FinancialControlAuthenticationProvider implements AuthenticationProvider {
 
-    @Autowired
-    private IUserRepository iUserRepository;
+    private final UserServiceImpl userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        Optional<User> userOptional = iUserRepository.findByEmail(username);
+        Optional<User> userOptional = userService.findByEmail(username);
 
         if (userOptional.isEmpty()) {
             throw new BadCredentialsException("No user registered with this details!");

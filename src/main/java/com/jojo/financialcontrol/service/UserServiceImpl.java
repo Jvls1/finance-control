@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserServiceImpl implements IUserService {
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     private final IUserRepository iUserRepository;
 
@@ -51,7 +51,7 @@ public class UserServiceImpl implements IUserService {
 
         User user = new User();
         BeanUtils.copyProperties(userCreationTO, user);
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setTimeCreated(LocalDateTime.now());
         user.setTimeUpdate(LocalDateTime.now());
 
@@ -78,7 +78,7 @@ public class UserServiceImpl implements IUserService {
             user.setName(userCreationTO.getName());
         }
         if (userCreationTO.getPassword() != null) {
-            user.setPassword(bCryptPasswordEncoder.encode(userCreationTO.getPassword()));
+            user.setPassword(passwordEncoder.encode(userCreationTO.getPassword()));
         }
 //        TODO: think the best impl to update a user...
         throw new UnsupportedOperationException("Update user not working...");
@@ -90,7 +90,7 @@ public class UserServiceImpl implements IUserService {
         if (!existsById) {
             throw new InfoNotFoundException("User not found");
         }
-        iUserRepository.deactivateUserByUserId(idUser);
+        iUserRepository.deactivateUserById(idUser);
     }
 
     @Override
