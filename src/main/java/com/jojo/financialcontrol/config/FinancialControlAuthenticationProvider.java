@@ -15,12 +15,13 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
 public class FinancialControlAuthenticationProvider implements AuthenticationProvider {
 
-    private final UserServiceImpl userService;
+    @Autowired
+    private UserServiceImpl userService;
 
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
