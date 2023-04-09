@@ -16,5 +16,5 @@ public interface IUserRepository extends IGenericRepository<User> {
 
     @Modifying
     @Query("update User u set u.timeRemoved = now() where u.id = :idUser")
-    void deactivateUserById(UUID idUser);
+    void updateUserById(UUID idUser);
 }

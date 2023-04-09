@@ -2,7 +2,6 @@ package com.jojo.financialcontrol.config;
 
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.service.UserServiceImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
