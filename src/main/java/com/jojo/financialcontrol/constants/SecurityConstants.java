@@ -1,8 +1,14 @@
 package com.jojo.financialcontrol.constants;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SecurityConstants {
 
-    public static final String JWT_KEY = "urY9qiDetB1aLKtldgPt3qyXpmm66457ONtF_CGKZskwxlxwYfgxsnnASQfbmvxA6-pBCL__2hmI3_OiZ_RWMyJBsizh9qwBctNqltey3cAo0IJNUt_Y0NtCc5-UX2cfxy7NjFA32yVVP4gT6gEL2PjyvItPdJEKFoGLLbBcu60";
+    @Value("${spring.authentication.jwt-secret}")
+    public static String JWT_KEY;
     public static final String JWT_HEADER = "Authorization";
     public static final String JWT_PREFIX = "Bearer ";
 

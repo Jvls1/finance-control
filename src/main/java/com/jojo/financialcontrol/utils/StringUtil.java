@@ -1,10 +1,13 @@
 package com.jojo.financialcontrol.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
 import java.util.regex.Pattern;
 
-public abstract class StringUtil extends StringUtils {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class StringUtil extends StringUtils {
 
     public static boolean isEmailValid(String email) {
         if (email == null) {
