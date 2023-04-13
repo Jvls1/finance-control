@@ -1,8 +1,5 @@
 package com.jojo.financialcontrol.model.to;
 
-import com.jojo.financialcontrol.model.User;
-import com.jojo.financialcontrol.model.Wallet;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
@@ -11,8 +8,6 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
 import java.util.UUID;
 
 @Getter

@@ -1,10 +1,8 @@
 package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.constants.Routes;
-import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.model.Wallet;
 import com.jojo.financialcontrol.model.to.WalletCreationTO;
-import com.jojo.financialcontrol.repository.IUserRepository;
 import com.jojo.financialcontrol.repository.IWalletRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,8 +19,6 @@ import java.time.Month;
 import java.time.Year;
 import java.util.List;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class WalletControllerTest extends BaseTest {
 
