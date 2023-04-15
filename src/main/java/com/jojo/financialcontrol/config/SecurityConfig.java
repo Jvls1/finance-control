@@ -1,8 +1,11 @@
 package com.jojo.financialcontrol.config;
 
+import com.jojo.financialcontrol.constants.SecurityConstants;
 import com.jojo.financialcontrol.filter.JWTTokenGeneratorFilter;
 import com.jojo.financialcontrol.constants.Routes;
 import com.jojo.financialcontrol.filter.JWTTokenValidatorFilter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,12 +18,16 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    @Autowired
+    private final SecurityConstants securityConstants;
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.cors().disable().csrf().disable()
-                .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new JWTTokenGeneratorFilter(securityConstants), BasicAuthenticationFilter.class)
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
                 .requestMatchers(Routes.LOGIN).permitAll()

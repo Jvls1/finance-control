@@ -1,23 +1,29 @@
 package com.jojo.financialcontrol.constants;
 
+import jakarta.annotation.PostConstruct;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
-@Component
-public class SecurityConstants {
+@Configuration
+@Getter
+public class SecurityConstants implements EnvironmentAware {
 
+    @Autowired
+    private Environment environment;
     private String jwtKey;
-
     public static final String JWT_HEADER = "Authorization";
     public static final String JWT_PREFIX = "Bearer ";
 
-    @Autowired
-    public SecurityConstants(@Value("${spring.authentication.jwt-secret}") String jwtKey) {
-        this.jwtKey = jwtKey;
+    @PostConstruct
+    public void load() {
+        jwtKey = environment.getProperty("spring.authentication.jwt-secret");
     }
 
-    public String getJwtKey() {
-        return jwtKey;
+    @Override
+    public void setEnvironment(final Environment environment) {
+        this.environment = environment;
     }
 }
