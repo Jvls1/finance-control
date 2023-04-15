@@ -44,7 +44,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") UUID idUser) throws InfoNotFoundException {
         userService.deleteById(idUser);
         return ResponseEntity.ok("Deleted");
