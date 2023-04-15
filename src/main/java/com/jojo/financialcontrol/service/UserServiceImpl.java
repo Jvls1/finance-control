@@ -59,6 +59,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     public User updateUser(UUID idUser, UserCreationTO userCreationTO) throws Exception {
+//        TODO: think the best impl to update a user...
         Optional<User> userOptional = iUserRepository.findById(idUser);
         if (userOptional.isEmpty()) {
             throw new InfoNotFoundException("User not found");
@@ -80,8 +81,7 @@ public class UserServiceImpl implements IUserService {
         if (userCreationTO.getPassword() != null) {
             user.setPassword(passwordEncoder.encode(userCreationTO.getPassword()));
         }
-//        TODO: think the best impl to update a user...
-        throw new UnsupportedOperationException("Update user not working...");
+        return iUserRepository.save(user);
     }
 
     @Override

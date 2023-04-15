@@ -21,14 +21,13 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
     private final SecurityConstants securityConstants;
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.cors().disable().csrf().disable()
                 .addFilterAfter(new JWTTokenGeneratorFilter(securityConstants), BasicAuthenticationFilter.class)
-                .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JWTTokenValidatorFilter(securityConstants), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
                 .requestMatchers(Routes.LOGIN).permitAll()
                 .requestMatchers(HttpMethod.POST, Routes.USER).permitAll()

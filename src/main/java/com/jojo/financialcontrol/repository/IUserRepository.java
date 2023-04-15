@@ -17,7 +17,7 @@ public interface IUserRepository extends IGenericRepository<User> {
 
     @Modifying
     @Query("""
-            update User u 
+             update User u 
                set u.timeRemoved = CURRENT_TIMESTAMP() 
              where u.id = :idUser
             """)
