@@ -2,6 +2,7 @@ package com.jojo.financialcontrol.repository;
 
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.repository.generic.IGenericRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,11 +16,12 @@ public interface IUserRepository extends IGenericRepository<User> {
 
     Optional<User> findByEmail(String email);
 
+    @Transactional
     @Modifying
     @Query("""
              update User u 
                set u.timeRemoved = CURRENT_TIMESTAMP() 
              where u.id = :idUser
             """)
-    void updateUserById(@Param("idUser") UUID idUser);
+    void deleteUserById(@Param("idUser") UUID idUser);
 }
