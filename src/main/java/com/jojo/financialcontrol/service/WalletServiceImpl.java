@@ -11,6 +11,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -57,8 +60,18 @@ public class WalletServiceImpl implements IWalletService {
             }
             wallet.setWalletCollaborator(userCollaboratorOptional.get());
         }
-        wallet.setMonth(walletCreationTO.getMonth());
-        wallet.setYear(walletCreationTO.getYear());
+        LocalDate now = LocalDate.now();
+
+        if (walletCreationTO.getMonth() != null) {
+            wallet.setMonth(walletCreationTO.getMonth());
+        } else {
+            wallet.setMonth(now.getMonth());
+        }
+        if (walletCreationTO.getYear() != null) {
+            wallet.setYear(walletCreationTO.getYear());
+        } else {
+            wallet.setYear(Year.now());
+        }
 
         wallet.setWalletOwner(userOwnerOptional.get());
         iWalletRepository.save(wallet);

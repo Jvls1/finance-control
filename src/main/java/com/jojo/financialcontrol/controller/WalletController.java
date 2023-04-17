@@ -53,7 +53,7 @@ public class WalletController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody WalletCreationTO walletParam) throws InfoNotFoundException {
+    public ResponseEntity<Object> createWallet(@RequestBody WalletCreationTO walletParam) throws InfoNotFoundException {
         walletService.save(walletParam);
         return ResponseEntity.ok("Created");
     }
