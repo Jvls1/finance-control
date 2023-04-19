@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,12 +45,12 @@ public class WalletController {
     }
 
     @GetMapping("/owner/{id}")
-    public ResponseEntity<Wallet> getWalletByOwnerId(@PathVariable("id") UUID idWallet) throws InfoNotFoundException {
-        Optional<Wallet> walletOptional = walletService.findByWalletOwnerId(idWallet);
-        if(walletOptional.isEmpty()) {
+    public ResponseEntity<List<Wallet>> getWalletByOwnerId(@PathVariable("id") UUID idWallet) throws InfoNotFoundException {
+        List<Wallet> wallets = walletService.findByWalletOwnerId(idWallet);
+        if(wallets.isEmpty()) {
             throw new InfoNotFoundException("Wallet not found");
         }
-        return new ResponseEntity<>(walletOptional.get(), HttpStatus.OK);
+        return new ResponseEntity<>(wallets, HttpStatus.OK);
     }
 
     @PostMapping
@@ -65,6 +66,7 @@ public class WalletController {
         return ResponseEntity.ok("Add");
     }
 
+//    TODO: Change for soft delete?
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idWallet) {
         walletService.deleteById(idWallet);
@@ -75,6 +77,6 @@ public class WalletController {
     public ResponseEntity<Object> removeCollaboratorFromWallet(@RequestParam UUID idWallet, @RequestParam UUID idUser)
             throws InfoNotFoundException {
         walletService.removeCollaboratorFromWallet(idWallet, idUser);
-        return ResponseEntity.ok("Add");
+        return ResponseEntity.ok("Removed");
     }
 }

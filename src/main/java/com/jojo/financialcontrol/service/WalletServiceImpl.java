@@ -12,8 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.Year;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -107,8 +107,8 @@ public class WalletServiceImpl implements IWalletService {
         iWalletRepository.removeWalletCollaboratorByWalletIdAndUserId(idWallet, idUser);
     }
 
-    public Optional<Wallet> findByWalletOwnerId(UUID idUser) {
-        return iWalletRepository.findByWalletOwnerId(idUser);
+    public List<Wallet> findByWalletOwnerId(UUID idUser) {
+        return iWalletRepository.findAllByWalletOwnerId(idUser);
     }
 
 }

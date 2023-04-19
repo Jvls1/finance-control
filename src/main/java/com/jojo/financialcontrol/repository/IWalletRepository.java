@@ -2,13 +2,14 @@ package com.jojo.financialcontrol.repository;
 
 import com.jojo.financialcontrol.model.Wallet;
 import com.jojo.financialcontrol.repository.generic.IGenericRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -23,8 +24,9 @@ public interface IWalletRepository extends IGenericRepository<Wallet> {
             """)
     Page<Wallet> findAllByWalletOwnerIdOrWalletCollaboratorId(Pageable page, UUID idUser);
 
-    Optional<Wallet> findByWalletOwnerId(UUID idUserOwner);
+    List<Wallet> findAllByWalletOwnerId(UUID idUserOwner);
 
+    @Transactional
     @Modifying
     @Query("""
             update Wallet w 
