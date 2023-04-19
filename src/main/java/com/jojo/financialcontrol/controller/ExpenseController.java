@@ -1,11 +1,11 @@
 package com.jojo.financialcontrol.controller;
 
 
+import com.jojo.financialcontrol.constants.Routes;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Expense;
 import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
 import com.jojo.financialcontrol.service.ExpenseServiceImpl;
-import com.jojo.financialcontrol.constants.Routes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -28,10 +28,10 @@ public class ExpenseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idExpense) {
+    public ResponseEntity<Expense> getExpenseById(@PathVariable("id") UUID idExpense) throws InfoNotFoundException {
         Optional<Expense> expense = expenseService.findById(idExpense);
         if (expense.isEmpty()) {
-            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+            throw new InfoNotFoundException("Expense not found");
         }
         return new ResponseEntity<>(expense.get(), HttpStatus.OK);
     }
@@ -42,6 +42,7 @@ public class ExpenseController {
         return ResponseEntity.ok("Created");
     }
 
+    //TODO: change to soft delete
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idExpense) {
         expenseService.deleteById(idExpense);
