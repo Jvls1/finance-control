@@ -5,7 +5,6 @@ import com.jojo.financialcontrol.filter.JWTTokenGeneratorFilter;
 import com.jojo.financialcontrol.constants.Routes;
 import com.jojo.financialcontrol.filter.JWTTokenValidatorFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

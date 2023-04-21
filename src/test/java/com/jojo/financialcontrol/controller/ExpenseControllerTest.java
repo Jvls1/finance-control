@@ -3,7 +3,6 @@ package com.jojo.financialcontrol.controller;
 import com.jojo.financialcontrol.constants.Routes;
 import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import com.jojo.financialcontrol.model.Expense;
-import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
 import com.jojo.financialcontrol.repository.IExpenseRepository;
 import org.junit.jupiter.api.Assertions;
