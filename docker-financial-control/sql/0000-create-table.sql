@@ -7,9 +7,8 @@ CREATE TABLE expense
     description   VARCHAR(100),
     amount        DECIMAL(8, 2) NOT NULL,
     date_register date          NOT NULL,
-    id_user       UUID          NOT NULL,
-    id_wallet     UUID          NOT NULL,
-    buy_method    VARCHAR(255),
+    id_wallet     UUID,
+    buy_method    VARCHAR(255)  NOT NULL,
     CONSTRAINT pk_expense PRIMARY KEY (id)
 );
 

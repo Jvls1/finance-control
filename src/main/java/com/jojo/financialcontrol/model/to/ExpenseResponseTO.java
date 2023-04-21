@@ -1,6 +1,7 @@
 package com.jojo.financialcontrol.model.to;
 
 import com.jojo.financialcontrol.enums.EnumBuyMethod;
+import com.jojo.financialcontrol.model.Expense;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
@@ -15,23 +16,25 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class ExpenseCreationTO {
+public class ExpenseResponseTO {
 
     private String description;
 
-//    @NotBlank(message = "Amount is mandatory")
-    @DecimalMin(value = "0.0", inclusive = true)
-    @DecimalMax(value = "1000000", inclusive = false)
-    @Digits(integer = 6, fraction = 2)
     private BigDecimal amount;
 
     private LocalDate dateRegister;
 
-    @NotBlank(message = "Wallet is mandatory")
     private UUID idWallet;
 
-    @NotBlank(message = "Buy method is mandatory")
     private EnumBuyMethod enumBuyMethod;
+
+    public ExpenseResponseTO setValues(Expense expense) {
+        description = expense.getDescription();
+        amount = expense.getAmount();
+        dateRegister = expense.getDateRegister();
+        idWallet = expense.getWallet().getId();
+        enumBuyMethod = expense.getEnumBuyMethod();
+        return this;
+    }
 
 }

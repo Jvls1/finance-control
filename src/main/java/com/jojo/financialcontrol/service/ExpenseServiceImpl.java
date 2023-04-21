@@ -5,15 +5,20 @@ import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Expense;
 import com.jojo.financialcontrol.model.Wallet;
 import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
+import com.jojo.financialcontrol.model.to.ExpenseResponseTO;
 import com.jojo.financialcontrol.repository.IExpenseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -26,13 +31,39 @@ public class ExpenseServiceImpl implements IExpenseService {
     private final WalletServiceImpl walletService;
 
     @Override
+    @Deprecated
     public Page<Expense> findAll(Integer page, Integer row) {
         return iExpenseRepository.findAllByWalletWalletOwnerId(PageRequest.of(page, row), sessionService.sessionUser().getId());
     }
 
     @Override
+    public Page<ExpenseResponseTO> findAllExpense(Integer page, Integer row) {
+        Page<Expense> expensePage = iExpenseRepository.findAllByWalletWalletOwnerId(PageRequest.of(page, row), sessionService.sessionUser().getId());
+
+        List<ExpenseResponseTO> expenseResponseTOS = expensePage.getContent()
+                .stream()
+                .map(expense -> new ExpenseResponseTO().setValues(expense))
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(expenseResponseTOS);
+    }
+
+    @Override
+    @Deprecated
     public Optional<Expense> findById(UUID idExpense) {
         return iExpenseRepository.findByIdAndWalletWalletOwnerId(idExpense, sessionService.sessionUser().getId());
+    }
+
+    @Override
+    public Optional<ExpenseResponseTO> findByIdExpense(UUID idExpense) {
+        //TODO: resolve the infinite recursion
+        Optional<Expense> expenseOpt = iExpenseRepository.findByIdAndWalletWalletOwnerId(idExpense, sessionService.sessionUser().getId());
+        if (expenseOpt.isEmpty()) {
+            return Optional.empty();
+        }
+        ExpenseResponseTO expenseResponseTO = new ExpenseResponseTO();
+        expenseResponseTO.setValues(expenseOpt.get());
+        return Optional.of(expenseResponseTO);
     }
 
     @Override
@@ -49,6 +80,7 @@ public class ExpenseServiceImpl implements IExpenseService {
             throw new InfoNotFoundException("Wallet not found");
         }
         Expense expense = new Expense();
+        expense.setAmount(expenseCreationTO.getAmount());
         expense.setDescription(expenseCreationTO.getDescription());
         expense.setDateRegister(LocalDate.now());
         expense.setWallet(walletOptional.get());
@@ -59,6 +91,6 @@ public class ExpenseServiceImpl implements IExpenseService {
 
     @Override
     public void deleteById(UUID idExpense) {
-        iExpenseRepository.deleteById(idExpense);
+        iExpenseRepository.deleteByExpenseId(idExpense);
     }
 }
