@@ -1,11 +1,12 @@
 package com.jojo.financialcontrol.controller;
 
 
+import com.jojo.financialcontrol.constants.Routes;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Expense;
 import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
+import com.jojo.financialcontrol.model.to.ExpenseResponseTO;
 import com.jojo.financialcontrol.service.ExpenseServiceImpl;
-import com.jojo.financialcontrol.constants.Routes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -23,15 +24,15 @@ public class ExpenseController {
     private final ExpenseServiceImpl expenseService;
 
     @GetMapping
-    public ResponseEntity<Page<Expense>> findAll(@RequestParam Integer page, @RequestParam Integer row) {
-        return new ResponseEntity<>(expenseService.findAll(page, row), HttpStatus.OK);
+    public ResponseEntity<Page<ExpenseResponseTO>> findAll(@RequestParam Integer page, @RequestParam Integer row) {
+        return new ResponseEntity<>(expenseService.findAllExpense(page, row), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idExpense) {
-        Optional<Expense> expense = expenseService.findById(idExpense);
+    public ResponseEntity<ExpenseResponseTO> getExpenseById(@PathVariable("id") UUID idExpense) throws InfoNotFoundException {
+        Optional<ExpenseResponseTO> expense = expenseService.findByIdExpense(idExpense);
         if (expense.isEmpty()) {
-            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+            throw new InfoNotFoundException("Expense not found");
         }
         return new ResponseEntity<>(expense.get(), HttpStatus.OK);
     }
