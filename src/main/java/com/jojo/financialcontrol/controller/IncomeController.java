@@ -1,7 +1,10 @@
 package com.jojo.financialcontrol.controller;
 
 
+import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Income;
+import com.jojo.financialcontrol.model.to.IncomeCreationTO;
+import com.jojo.financialcontrol.model.to.IncomeResponseTO;
 import com.jojo.financialcontrol.service.IncomeServiceImpl;
 import com.jojo.financialcontrol.constants.Routes;
 import lombok.RequiredArgsConstructor;
@@ -21,21 +24,21 @@ public class IncomeController {
     private final IncomeServiceImpl incomeService;
 
     @GetMapping
-    public ResponseEntity<Page<Income>> findAll(@RequestParam Integer page, @RequestParam Integer row) {
-        return new ResponseEntity<>(incomeService.findAll(page, row), HttpStatus.OK);
+    public ResponseEntity<Page<IncomeResponseTO>> findAll(@RequestParam Integer page, @RequestParam Integer row) {
+        return new ResponseEntity<>(incomeService.findAllIncome(page, row), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getExpenseById(@PathVariable("id") UUID idIncome) {
-        Optional<Income> income = incomeService.findById(idIncome);
+    public ResponseEntity<IncomeResponseTO> getExpenseById(@PathVariable("id") UUID idIncome) throws InfoNotFoundException {
+        Optional<IncomeResponseTO> income = incomeService.findByIdIncome(idIncome);
         if (income.isEmpty()) {
-            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+            throw new InfoNotFoundException("Income not found");
         }
         return new ResponseEntity<>(income.get(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody Income incomeParam) {
+    public ResponseEntity<Object> save(@RequestBody IncomeCreationTO incomeParam) throws InfoNotFoundException {
         incomeService.save(incomeParam);
         return ResponseEntity.ok("Created");
     }
