@@ -23,7 +23,6 @@ public class Income extends BaseEntity {
     private String description;
 
     @Column(name = "amount", precision = 8, scale = 2, nullable = false)
-    @NotBlank(message = "Amount is mandatory")
     @DecimalMin(value = "0.0", inclusive = true)
     @DecimalMax(value = "1000000", inclusive = false)
     @Digits(integer = 6, fraction = 2)
@@ -34,7 +33,6 @@ public class Income extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_wallet", nullable = false)
-    @NotBlank(message = "Wallet is mandatory")
     private Wallet wallet;
 
 }

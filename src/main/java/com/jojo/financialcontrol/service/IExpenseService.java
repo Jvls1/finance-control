@@ -14,7 +14,7 @@ public interface IExpenseService extends IGenericCrudService<Expense> {
 
     Page<ExpenseResponseTO> findAllExpense(Integer page, Integer row);
 
-    Optional<ExpenseResponseTO> findByIdExpense(UUID idEntity);
+    Optional<ExpenseResponseTO> findByIdExpense(UUID idEntity) throws InfoNotFoundException;
 
     void save(ExpenseCreationTO expenseCreationTO) throws InfoNotFoundException;
 }
