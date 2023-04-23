@@ -35,4 +35,14 @@ public interface IWalletRepository extends IGenericRepository<Wallet> {
                and w.walletCollaborator.id = :idUserCollaborator
              """)
     void removeWalletCollaboratorByWalletIdAndUserId(UUID idWallet, UUID idUserCollaborator);
+
+    @Transactional
+    @Modifying
+    @Query("""
+             update Wallet w 
+               set w.timeRemoved = CURRENT_TIMESTAMP() 
+             where w.id = :idWallet 
+             """)
+    void deleteByWalletId(UUID idWallet);
+
 }
