@@ -56,7 +56,6 @@ public class ExpenseServiceImpl implements IExpenseService {
 
     @Override
     public Optional<ExpenseResponseTO> findByIdExpense(UUID idExpense) {
-        //TODO: resolve the infinite recursion
         Optional<Expense> expenseOpt = iExpenseRepository.findByIdAndWalletWalletOwnerId(idExpense, sessionService.sessionUser().getId());
         if (expenseOpt.isEmpty()) {
             return Optional.empty();

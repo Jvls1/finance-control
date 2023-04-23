@@ -79,7 +79,7 @@ public class WalletServiceImpl implements IWalletService {
 
     @Override
     public void deleteById(UUID idWallet) {
-        iWalletRepository.deleteById(idWallet);
+        iWalletRepository.deleteByWalletId(idWallet);
     }
 
     public void addCollaboratorToWallet(UUID idWallet, UUID idUser) throws InfoNotFoundException {
