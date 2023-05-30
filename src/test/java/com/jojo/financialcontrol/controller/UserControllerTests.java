@@ -1,9 +1,9 @@
 package com.jojo.financialcontrol.controller;
 
-import com.jojo.financialcontrol.model.User;
-import com.jojo.financialcontrol.model.to.UserCreationTO;
-import com.jojo.financialcontrol.repository.IUserRepository;
-import com.jojo.financialcontrol.constants.Routes;
+import com.jojo.financialcontrol.domain.User;
+import com.jojo.financialcontrol.web.model.UserCreationTO;
+import com.jojo.financialcontrol.web.repositories.IUserRepository;
+import com.jojo.financialcontrol.infra.constants.Routes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

@@ -1,10 +1,10 @@
 package com.jojo.financialcontrol.controller;
 
-import com.jojo.financialcontrol.constants.Routes;
-import com.jojo.financialcontrol.enums.EnumBuyMethod;
-import com.jojo.financialcontrol.model.Expense;
-import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
-import com.jojo.financialcontrol.repository.IExpenseRepository;
+import com.jojo.financialcontrol.infra.constants.Routes;
+import com.jojo.financialcontrol.domain.EnumBuyMethod;
+import com.jojo.financialcontrol.domain.Expense;
+import com.jojo.financialcontrol.web.model.ExpenseCreationTO;
+import com.jojo.financialcontrol.web.repositories.IExpenseRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
