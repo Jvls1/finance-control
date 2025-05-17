@@ -1,9 +1,9 @@
 package com.jojo.financialcontrol.controller;
 
-import com.jojo.financialcontrol.infra.constants.Routes;
-import com.jojo.financialcontrol.domain.Wallet;
-import com.jojo.financialcontrol.web.model.WalletCreationTO;
-import com.jojo.financialcontrol.web.repositories.IWalletRepository;
+import com.jojo.financialcontrol.constants.Routes;
+import com.jojo.financialcontrol.model.Wallet;
+import com.jojo.financialcontrol.model.to.WalletCreationTO;
+import com.jojo.financialcontrol.repository.IWalletRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
