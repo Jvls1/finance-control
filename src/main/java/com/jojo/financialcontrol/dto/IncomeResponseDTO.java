@@ -1,7 +1,5 @@
-package com.jojo.financialcontrol.model.to;
+package com.jojo.financialcontrol.dto;
 
-import com.jojo.financialcontrol.enums.EnumBuyMethod;
-import com.jojo.financialcontrol.model.Expense;
 import com.jojo.financialcontrol.model.Income;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +14,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class IncomeResponseTO {
+public class IncomeResponseDTO {
 
     private String description;
 
@@ -26,7 +24,7 @@ public class IncomeResponseTO {
 
     private UUID idWallet;
 
-    public IncomeResponseTO setValues(Income income) {
+    public IncomeResponseDTO setValues(Income income) {
         description = income.getDescription();
         amount = income.getAmount();
         dateRegister = income.getDateRegister();

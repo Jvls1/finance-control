@@ -1,8 +1,8 @@
 package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.constants.Routes;
+import com.jojo.financialcontrol.dto.IncomeCreationDTO;
 import com.jojo.financialcontrol.model.Income;
-import com.jojo.financialcontrol.model.to.IncomeCreationTO;
 import com.jojo.financialcontrol.repository.IIncomeRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -56,7 +56,7 @@ public class IncomeControllerTest extends BaseTest {
     void save() {
         final String requestUrl = "http://localhost:" + randomServerPort + Routes.INCOME;
 
-        IncomeCreationTO incomeCreationTO = new IncomeCreationTO();
+        IncomeCreationDTO incomeCreationTO = new IncomeCreationDTO();
         incomeCreationTO.setAmount(new BigDecimal("10"));
         incomeCreationTO.setDescription("Test");
         /**

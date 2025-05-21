@@ -1,4 +1,4 @@
-package com.jojo.financialcontrol.model.to;
+package com.jojo.financialcontrol.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class WalletCreationTO {
+public class WalletCreationDTO {
 
     private Month month;
 

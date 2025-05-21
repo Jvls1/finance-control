@@ -3,9 +3,10 @@ package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Wallet;
-import com.jojo.financialcontrol.model.to.WalletCreationTO;
 import com.jojo.financialcontrol.service.WalletServiceImpl;
 import com.jojo.financialcontrol.constants.Routes;
+import com.jojo.financialcontrol.dto.WalletCreationDTO;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -54,7 +55,7 @@ public class WalletController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createWallet(@RequestBody WalletCreationTO walletParam) throws InfoNotFoundException {
+    public ResponseEntity<Object> createWallet(@RequestBody WalletCreationDTO walletParam) throws InfoNotFoundException {
         walletService.save(walletParam);
         return ResponseEntity.ok("Created");
     }

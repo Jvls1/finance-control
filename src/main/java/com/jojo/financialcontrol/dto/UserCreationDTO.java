@@ -1,4 +1,4 @@
-package com.jojo.financialcontrol.model.to;
+package com.jojo.financialcontrol.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserCreationTO {
+public class UserCreationDTO {
 
     @NotBlank(message = "Name is mandatory")
     private String name;

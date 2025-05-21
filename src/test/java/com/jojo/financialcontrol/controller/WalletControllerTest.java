@@ -1,8 +1,8 @@
 package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.constants.Routes;
+import com.jojo.financialcontrol.dto.WalletCreationDTO;
 import com.jojo.financialcontrol.model.Wallet;
-import com.jojo.financialcontrol.model.to.WalletCreationTO;
 import com.jojo.financialcontrol.repository.IWalletRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -59,7 +59,7 @@ public class WalletControllerTest extends BaseTest {
     void save() {
         final String requestUrl = "http://localhost:" + randomServerPort + Routes.WALLET;
 
-        WalletCreationTO walletCreationTO = new WalletCreationTO();
+        WalletCreationDTO walletCreationTO = new WalletCreationDTO();
         walletCreationTO.setIdWalletCollaborator(new UUID(1,1));
         walletCreationTO.setIdWalletOwner(new UUID(1,1));
         walletCreationTO.setYear(Year.now());

@@ -2,10 +2,10 @@ package com.jojo.financialcontrol.controller;
 
 
 import com.jojo.financialcontrol.constants.Routes;
+import com.jojo.financialcontrol.dto.UserCreationDTO;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.model.User;
-import com.jojo.financialcontrol.model.to.UserCreationTO;
 import com.jojo.financialcontrol.service.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,13 +33,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@Valid @RequestBody UserCreationTO userCreationTO) throws UserCreationException {
+    public ResponseEntity<User> save(@Valid @RequestBody UserCreationDTO userCreationTO) throws UserCreationException {
         User user = userService.createUser(userCreationTO);
         return ResponseEntity.ok(user);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUserById(@PathVariable("id") UUID idUser, @RequestBody UserCreationTO userCreationTO) throws Exception {
+    public ResponseEntity<User> updateUserById(@PathVariable("id") UUID idUser, @RequestBody UserCreationDTO userCreationTO) throws Exception {
         User user = userService.updateUser(idUser, userCreationTO);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

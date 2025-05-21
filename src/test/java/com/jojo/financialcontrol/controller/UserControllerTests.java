@@ -1,9 +1,10 @@
 package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.model.User;
-import com.jojo.financialcontrol.model.to.UserCreationTO;
 import com.jojo.financialcontrol.repository.IUserRepository;
 import com.jojo.financialcontrol.constants.Routes;
+import com.jojo.financialcontrol.dto.UserCreationDTO;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -66,7 +67,7 @@ public class UserControllerTests extends BaseTest {
     public void testSaveUser() {
         final String requestUrl = "http://localhost:" + randomServerPort + Routes.USER;
 
-        UserCreationTO userCreationTO = new UserCreationTO();
+        UserCreationDTO userCreationTO = new UserCreationDTO();
         userCreationTO.setName("jojo");
         userCreationTO.setEmail("jojo@gmail.com");
         userCreationTO.setPassword("12345678");

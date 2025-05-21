@@ -1,8 +1,8 @@
 package com.jojo.financialcontrol.service;
 
+import com.jojo.financialcontrol.dto.UserCreationDTO;
 import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.model.User;
-import com.jojo.financialcontrol.model.to.UserCreationTO;
 import com.jojo.financialcontrol.service.generic.IGenericCrudService;
 
 import java.util.Optional;
@@ -12,9 +12,9 @@ public interface IUserService extends IGenericCrudService<User> {
 
     Optional<User> findByEmail(String email);
 
-    User createUser(UserCreationTO userCreationTO) throws UserCreationException;
+    User createUser(UserCreationDTO userCreationTO) throws UserCreationException;
 
     //TODO: change de UserCreationTO to other Class
-    User updateUser(UUID idUser, UserCreationTO userCreationTO) throws Exception;
+    User updateUser(UUID idUser, UserCreationDTO userCreationTO) throws Exception;
 
 }

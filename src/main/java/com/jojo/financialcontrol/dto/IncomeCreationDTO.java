@@ -1,4 +1,4 @@
-package com.jojo.financialcontrol.model.to;
+package com.jojo.financialcontrol.dto;
 
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class IncomeCreationTO {
+public class IncomeCreationDTO {
 
     private String description;
 

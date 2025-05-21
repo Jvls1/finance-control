@@ -1,17 +1,16 @@
 package com.jojo.financialcontrol.service;
 
+import com.jojo.financialcontrol.dto.ExpenseCreationDTO;
+import com.jojo.financialcontrol.dto.ExpenseResponseDTO;
 import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Expense;
 import com.jojo.financialcontrol.model.Wallet;
-import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
-import com.jojo.financialcontrol.model.to.ExpenseResponseTO;
 import com.jojo.financialcontrol.repository.IExpenseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -37,12 +36,12 @@ public class ExpenseServiceImpl implements IExpenseService {
     }
 
     @Override
-    public Page<ExpenseResponseTO> findAllExpense(Integer page, Integer row) {
+    public Page<ExpenseResponseDTO> findAllExpense(Integer page, Integer row) {
         Page<Expense> expensePage = iExpenseRepository.findAllByWalletWalletOwnerId(PageRequest.of(page, row), sessionService.sessionUser().getId());
 
-        List<ExpenseResponseTO> expenseResponseTOS = expensePage.getContent()
+        List<ExpenseResponseDTO> expenseResponseTOS = expensePage.getContent()
                 .stream()
-                .map(expense -> new ExpenseResponseTO().setValues(expense))
+                .map(expense -> new ExpenseResponseDTO().setValues(expense))
                 .collect(Collectors.toList());
 
         return new PageImpl<>(expenseResponseTOS);
@@ -55,12 +54,12 @@ public class ExpenseServiceImpl implements IExpenseService {
     }
 
     @Override
-    public Optional<ExpenseResponseTO> findByIdExpense(UUID idExpense) {
+    public Optional<ExpenseResponseDTO> findByIdExpense(UUID idExpense) {
         Optional<Expense> expenseOpt = iExpenseRepository.findByIdAndWalletWalletOwnerId(idExpense, sessionService.sessionUser().getId());
         if (expenseOpt.isEmpty()) {
             return Optional.empty();
         }
-        ExpenseResponseTO expenseResponseTO = new ExpenseResponseTO();
+        ExpenseResponseDTO expenseResponseTO = new ExpenseResponseDTO();
         expenseResponseTO.setValues(expenseOpt.get());
         return Optional.of(expenseResponseTO);
     }
@@ -73,7 +72,7 @@ public class ExpenseServiceImpl implements IExpenseService {
     }
 
     @Override
-    public void save(ExpenseCreationTO expenseCreationTO) throws InfoNotFoundException {
+    public void save(ExpenseCreationDTO expenseCreationTO) throws InfoNotFoundException {
         Optional<Wallet> walletOptional = walletService.findById(expenseCreationTO.getIdWallet());
         if (walletOptional.isEmpty()) {
             throw new InfoNotFoundException("Wallet not found");

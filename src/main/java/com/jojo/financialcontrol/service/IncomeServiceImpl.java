@@ -1,11 +1,10 @@
 package com.jojo.financialcontrol.service;
 
+import com.jojo.financialcontrol.dto.IncomeCreationDTO;
+import com.jojo.financialcontrol.dto.IncomeResponseDTO;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Income;
 import com.jojo.financialcontrol.model.Wallet;
-import com.jojo.financialcontrol.model.to.ExpenseResponseTO;
-import com.jojo.financialcontrol.model.to.IncomeCreationTO;
-import com.jojo.financialcontrol.model.to.IncomeResponseTO;
 import com.jojo.financialcontrol.repository.IIncomeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -35,12 +34,12 @@ public class IncomeServiceImpl implements IIncomeService {
         return iIncomeRepository.findAllByWalletWalletOwnerId(PageRequest.of(page, row), iSessionService.sessionUser().getId());
     }
 
-    public Page<IncomeResponseTO> findAllIncome(Integer page, Integer row) {
+    public Page<IncomeResponseDTO> findAllIncome(Integer page, Integer row) {
         Page<Income> incomePage = iIncomeRepository.findAllByWalletWalletOwnerId(PageRequest.of(page, row), iSessionService.sessionUser().getId());
 
-        List<IncomeResponseTO> expenseResponseTOS = incomePage.getContent()
+        List<IncomeResponseDTO> expenseResponseTOS = incomePage.getContent()
                 .stream()
-                .map(income -> new IncomeResponseTO().setValues(income))
+                .map(income -> new IncomeResponseDTO().setValues(income))
                 .collect(Collectors.toList());
 
         return new PageImpl<>(expenseResponseTOS);
@@ -52,12 +51,12 @@ public class IncomeServiceImpl implements IIncomeService {
         return iIncomeRepository.findByIdAndWalletWalletOwnerId(idIncome, iSessionService.sessionUser().getId());
     }
 
-    public Optional<IncomeResponseTO> findByIdIncome(UUID idIncome) throws InfoNotFoundException {
+    public Optional<IncomeResponseDTO> findByIdIncome(UUID idIncome) throws InfoNotFoundException {
         Optional<Income> incomeOpt = iIncomeRepository.findByIdAndWalletWalletOwnerId(idIncome, iSessionService.sessionUser().getId());
         if(incomeOpt.isEmpty()) {
             return Optional.empty();
         }
-        IncomeResponseTO incomeResponseTO = new IncomeResponseTO();
+        IncomeResponseDTO incomeResponseTO = new IncomeResponseDTO();
         incomeResponseTO.setValues(incomeOpt.get());
         return Optional.of(incomeResponseTO);
     }
@@ -69,7 +68,7 @@ public class IncomeServiceImpl implements IIncomeService {
     }
 
     @Override
-    public void save(IncomeCreationTO incomeCreationTO) throws InfoNotFoundException {
+    public void save(IncomeCreationDTO incomeCreationTO) throws InfoNotFoundException {
         Optional<Wallet> walletOptional = iWalletService.findById(incomeCreationTO.getIdWallet());
         if (walletOptional.isEmpty()) {
             throw new InfoNotFoundException("Wallet not found");

@@ -2,10 +2,9 @@ package com.jojo.financialcontrol.controller;
 
 
 import com.jojo.financialcontrol.constants.Routes;
+import com.jojo.financialcontrol.dto.ExpenseCreationDTO;
+import com.jojo.financialcontrol.dto.ExpenseResponseDTO;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
-import com.jojo.financialcontrol.model.Expense;
-import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
-import com.jojo.financialcontrol.model.to.ExpenseResponseTO;
 import com.jojo.financialcontrol.service.ExpenseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,13 +23,13 @@ public class ExpenseController {
     private final ExpenseServiceImpl expenseService;
 
     @GetMapping
-    public ResponseEntity<Page<ExpenseResponseTO>> findAll(@RequestParam Integer page, @RequestParam Integer row) {
+    public ResponseEntity<Page<ExpenseResponseDTO>> findAll(@RequestParam Integer page, @RequestParam Integer row) {
         return new ResponseEntity<>(expenseService.findAllExpense(page, row), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ExpenseResponseTO> getExpenseById(@PathVariable("id") UUID idExpense) throws InfoNotFoundException {
-        Optional<ExpenseResponseTO> expense = expenseService.findByIdExpense(idExpense);
+    public ResponseEntity<ExpenseResponseDTO> getExpenseById(@PathVariable("id") UUID idExpense) throws InfoNotFoundException {
+        Optional<ExpenseResponseDTO> expense = expenseService.findByIdExpense(idExpense);
         if (expense.isEmpty()) {
             throw new InfoNotFoundException("Expense not found");
         }
@@ -38,7 +37,7 @@ public class ExpenseController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody ExpenseCreationTO expenseParam) throws InfoNotFoundException {
+    public ResponseEntity<Object> save(@RequestBody ExpenseCreationDTO expenseParam) throws InfoNotFoundException {
         expenseService.save(expenseParam);
         return ResponseEntity.ok("Created");
     }

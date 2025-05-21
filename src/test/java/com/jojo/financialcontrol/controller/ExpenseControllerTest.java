@@ -1,9 +1,9 @@
 package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.constants.Routes;
+import com.jojo.financialcontrol.dto.ExpenseCreationDTO;
 import com.jojo.financialcontrol.enums.EnumBuyMethod;
 import com.jojo.financialcontrol.model.Expense;
-import com.jojo.financialcontrol.model.to.ExpenseCreationTO;
 import com.jojo.financialcontrol.repository.IExpenseRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -57,7 +57,7 @@ public class ExpenseControllerTest extends BaseTest {
     void save() {
         final String requestUrl = "http://localhost:" + randomServerPort + Routes.EXPENSE;
 
-        ExpenseCreationTO expenseCreationTO = new ExpenseCreationTO();
+        ExpenseCreationDTO expenseCreationTO = new ExpenseCreationDTO();
         expenseCreationTO.setAmount(new BigDecimal("10"));
         expenseCreationTO.setDescription("Test");
         /**

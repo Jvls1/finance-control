@@ -1,9 +1,9 @@
 package com.jojo.financialcontrol.service;
 
+import com.jojo.financialcontrol.dto.UserCreationDTO;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.exception.UserCreationException;
 import com.jojo.financialcontrol.model.User;
-import com.jojo.financialcontrol.model.to.UserCreationTO;
 import com.jojo.financialcontrol.repository.IUserRepository;
 import com.jojo.financialcontrol.utils.StringUtil;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +44,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User createUser(UserCreationTO userCreationTO) throws UserCreationException {
+    public User createUser(UserCreationDTO userCreationTO) throws UserCreationException {
         if (!StringUtil.isEmailValid(userCreationTO.getEmail())) {
             throw new UserCreationException("Invalid Email");
         }
@@ -58,7 +58,7 @@ public class UserServiceImpl implements IUserService {
         return iUserRepository.save(user);
     }
 
-    public User updateUser(UUID idUser, UserCreationTO userCreationTO) throws Exception {
+    public User updateUser(UUID idUser, UserCreationDTO userCreationTO) throws Exception {
 //        TODO: think the best impl to update a user...
         Optional<User> userOptional = iUserRepository.findById(idUser);
         if (userOptional.isEmpty()) {

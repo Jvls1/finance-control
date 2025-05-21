@@ -2,11 +2,11 @@ package com.jojo.financialcontrol.controller;
 
 
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
-import com.jojo.financialcontrol.model.Income;
-import com.jojo.financialcontrol.model.to.IncomeCreationTO;
-import com.jojo.financialcontrol.model.to.IncomeResponseTO;
 import com.jojo.financialcontrol.service.IncomeServiceImpl;
 import com.jojo.financialcontrol.constants.Routes;
+import com.jojo.financialcontrol.dto.IncomeCreationDTO;
+import com.jojo.financialcontrol.dto.IncomeResponseDTO;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -24,13 +24,13 @@ public class IncomeController {
     private final IncomeServiceImpl incomeService;
 
     @GetMapping
-    public ResponseEntity<Page<IncomeResponseTO>> findAll(@RequestParam Integer page, @RequestParam Integer row) {
+    public ResponseEntity<Page<IncomeResponseDTO>> findAll(@RequestParam Integer page, @RequestParam Integer row) {
         return new ResponseEntity<>(incomeService.findAllIncome(page, row), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<IncomeResponseTO> getExpenseById(@PathVariable("id") UUID idIncome) throws InfoNotFoundException {
-        Optional<IncomeResponseTO> income = incomeService.findByIdIncome(idIncome);
+    public ResponseEntity<IncomeResponseDTO> getExpenseById(@PathVariable("id") UUID idIncome) throws InfoNotFoundException {
+        Optional<IncomeResponseDTO> income = incomeService.findByIdIncome(idIncome);
         if (income.isEmpty()) {
             throw new InfoNotFoundException("Income not found");
         }
@@ -38,7 +38,7 @@ public class IncomeController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody IncomeCreationTO incomeParam) throws InfoNotFoundException {
+    public ResponseEntity<Object> save(@RequestBody IncomeCreationDTO incomeParam) throws InfoNotFoundException {
         incomeService.save(incomeParam);
         return ResponseEntity.ok("Created");
     }

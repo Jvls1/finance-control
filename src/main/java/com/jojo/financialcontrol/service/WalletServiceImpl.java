@@ -1,9 +1,9 @@
 package com.jojo.financialcontrol.service;
 
+import com.jojo.financialcontrol.dto.WalletCreationDTO;
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.User;
 import com.jojo.financialcontrol.model.Wallet;
-import com.jojo.financialcontrol.model.to.WalletCreationTO;
 import com.jojo.financialcontrol.repository.IWalletRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -47,7 +47,7 @@ public class WalletServiceImpl implements IWalletService {
     }
 
     @Override
-    public void save(WalletCreationTO walletCreationTO) throws InfoNotFoundException {
+    public void save(WalletCreationDTO walletCreationTO) throws InfoNotFoundException {
         Wallet wallet = new Wallet();
         Optional<User> userOwnerOptional = iUserService.findById(walletCreationTO.getIdWalletOwner());
         if (userOwnerOptional.isEmpty()) {
