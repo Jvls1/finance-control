@@ -1,5 +1,4 @@
-package com.jojo.financialcontrol.filter;
-
+package com.jojo.financialcontrol.config.filter;
 
 import com.jojo.financialcontrol.constants.Routes;
 import com.jojo.financialcontrol.constants.SecurityConstants;
@@ -13,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

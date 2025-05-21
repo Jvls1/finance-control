@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/financial_control
+    username: financial_control
+    password: admin
   authentication:
-    jwt-secret: ${JWT_SECRET}
+    jwt-secret: jnxGXm9gdrWKPcFJfFVk7UODJbmZ0LZ1B5y7mFocT+o=
