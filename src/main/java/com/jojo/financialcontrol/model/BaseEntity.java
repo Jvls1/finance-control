@@ -1,13 +1,12 @@
 package com.jojo.financialcontrol.model;
 
-import com.jojo.financialcontrol.utils.UuidGenerator;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -19,8 +18,7 @@ import java.util.UUID;
 public abstract class BaseEntity implements Serializable {
 
     @Id
-    @GenericGenerator(name="uuid_generator", strategy = UuidGenerator.STRATEGY_PATH)
-    @GeneratedValue(generator = "uuid_generator")
+    @GeneratedValue(strategy = GenerationType.UUID) 
     private UUID id;
 
     @Column(name = "time_creation")
@@ -31,5 +29,4 @@ public abstract class BaseEntity implements Serializable {
 
     @Column(name = "time_removed")
     private LocalDateTime timeRemoved;
-
 }

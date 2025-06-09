@@ -33,5 +33,4 @@ public class Income extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_wallet", nullable = false)
     private Wallet wallet;
-
 }
