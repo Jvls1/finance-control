@@ -3,6 +3,7 @@ package com.jojo.financialcontrol.controller;
 
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.service.IncomeServiceImpl;
+import com.jojo.financialcontrol.utils.URIUtil;
 import com.jojo.financialcontrol.constants.Routes;
 import com.jojo.financialcontrol.dto.IncomeCreationDTO;
 import com.jojo.financialcontrol.dto.IncomeResponseDTO;
@@ -23,6 +24,12 @@ public class IncomeController {
 
     private final IncomeServiceImpl incomeService;
 
+    @PostMapping
+    public ResponseEntity<Object> save(@RequestBody IncomeCreationDTO incomeParam) throws InfoNotFoundException {
+        var income = incomeService.save(incomeParam);
+        return ResponseEntity.created(URIUtil.getUri(income.getId())).build();
+    }
+
     @GetMapping
     public ResponseEntity<Page<IncomeResponseDTO>> findAll(@RequestParam Integer page, @RequestParam Integer row) {
         return new ResponseEntity<>(incomeService.findAllIncome(page, row), HttpStatus.OK);
@@ -37,15 +44,9 @@ public class IncomeController {
         return new ResponseEntity<>(income.get(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Object> save(@RequestBody IncomeCreationDTO incomeParam) throws InfoNotFoundException {
-        incomeService.save(incomeParam);
-        return ResponseEntity.ok("Created");
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idIncome) {
         incomeService.deleteById(idIncome);
-        return ResponseEntity.ok("Deleted");
+        return ResponseEntity.noContent().build();
     }
 }

@@ -17,5 +17,5 @@ public interface IExpenseService extends IGenericCrudService<Expense> {
 
     Optional<ExpenseResponseDTO> findByIdExpense(UUID idEntity) throws InfoNotFoundException;
 
-    void save(ExpenseCreationDTO expenseCreationTO) throws InfoNotFoundException;
+    Expense save(ExpenseCreationDTO expenseCreationTO) throws InfoNotFoundException;
 }

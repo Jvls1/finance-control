@@ -7,6 +7,6 @@ import com.jojo.financialcontrol.service.generic.IGenericCrudService;
 
 public interface IIncomeService extends IGenericCrudService<Income> {
 
-    void save(IncomeCreationDTO incomeCreationTO) throws InfoNotFoundException;
+    Income save(IncomeCreationDTO incomeCreationTO) throws InfoNotFoundException;
     
 }

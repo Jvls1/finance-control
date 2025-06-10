@@ -8,6 +8,6 @@ import org.springframework.web.client.HttpClientErrorException;
 
 public interface IWalletService extends IGenericCrudService<Wallet> {
 
-    void save(WalletCreationDTO wallet) throws HttpClientErrorException.NotFound, InfoNotFoundException;
+    Wallet save(WalletCreationDTO wallet) throws HttpClientErrorException.NotFound, InfoNotFoundException;
 
 }

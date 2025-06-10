@@ -72,7 +72,7 @@ public class ExpenseServiceImpl implements IExpenseService {
     }
 
     @Override
-    public void save(ExpenseCreationDTO expenseCreationTO) throws InfoNotFoundException {
+    public Expense save(ExpenseCreationDTO expenseCreationTO) throws InfoNotFoundException {
         Optional<Wallet> walletOptional = walletService.findById(expenseCreationTO.getIdWallet());
         if (walletOptional.isEmpty()) {
             throw new InfoNotFoundException("Wallet not found");
@@ -84,7 +84,7 @@ public class ExpenseServiceImpl implements IExpenseService {
         expense.setWallet(walletOptional.get());
         expense.setEnumBuyMethod(expenseCreationTO.getEnumBuyMethod());
 
-        iExpenseRepository.save(expense);
+        return iExpenseRepository.save(expense);
     }
 
     @Override

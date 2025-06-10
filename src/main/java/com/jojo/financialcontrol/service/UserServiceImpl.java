@@ -45,6 +45,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User createUser(UserCreationDTO userCreationTO) throws UserCreationException {
+        var now = LocalDateTime.now();
         if (!StringUtil.isEmailValid(userCreationTO.getEmail())) {
             throw new UserCreationException("Invalid Email");
         }
@@ -52,8 +53,8 @@ public class UserServiceImpl implements IUserService {
         User user = new User();
         BeanUtils.copyProperties(userCreationTO, user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setTimeCreated(LocalDateTime.now());
-        user.setTimeUpdate(LocalDateTime.now());
+        user.setTimeCreated(now);
+        user.setTimeUpdate(now);
 
         return iUserRepository.save(user);
     }

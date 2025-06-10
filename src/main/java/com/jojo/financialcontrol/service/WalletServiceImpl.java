@@ -47,7 +47,7 @@ public class WalletServiceImpl implements IWalletService {
     }
 
     @Override
-    public void save(WalletCreationDTO walletCreationTO) throws InfoNotFoundException {
+    public Wallet save(WalletCreationDTO walletCreationTO) throws InfoNotFoundException {
         Wallet wallet = new Wallet();
         Optional<User> userOwnerOptional = iUserService.findById(walletCreationTO.getIdWalletOwner());
         if (userOwnerOptional.isEmpty()) {
@@ -74,7 +74,7 @@ public class WalletServiceImpl implements IWalletService {
         }
 
         wallet.setWalletOwner(userOwnerOptional.get());
-        iWalletRepository.save(wallet);
+        return iWalletRepository.save(wallet);
     }
 
     @Override

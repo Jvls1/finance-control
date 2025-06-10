@@ -1,9 +1,9 @@
 package com.jojo.financialcontrol.controller;
 
-
 import com.jojo.financialcontrol.exception.InfoNotFoundException;
 import com.jojo.financialcontrol.model.Wallet;
 import com.jojo.financialcontrol.service.WalletServiceImpl;
+import com.jojo.financialcontrol.utils.URIUtil;
 import com.jojo.financialcontrol.constants.Routes;
 import com.jojo.financialcontrol.dto.WalletCreationDTO;
 
@@ -25,6 +25,12 @@ public class WalletController {
 
     private final WalletServiceImpl walletService;
 
+    @PostMapping
+    public ResponseEntity<Object> createWallet(@RequestBody WalletCreationDTO walletParam) throws InfoNotFoundException {
+        var wallet = walletService.save(walletParam);
+        return ResponseEntity.created(URIUtil.getUri(wallet.getId())).build();
+    }
+
     @GetMapping()
     public ResponseEntity<Page<Wallet>> getWalletAll(@RequestParam Integer page, @RequestParam Integer row) throws InfoNotFoundException {
         Page<Wallet> walletPage = walletService.findAllWalletsByOwner(PageRequest.of(page, row));
@@ -32,7 +38,6 @@ public class WalletController {
             throw new InfoNotFoundException("Wallet not found");
         }
         return new ResponseEntity<>(walletPage, HttpStatus.OK);
-
     }
 
     @GetMapping("/{id}")
@@ -42,7 +47,6 @@ public class WalletController {
             return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(wallet.get(), HttpStatus.OK);
-
     }
 
     @GetMapping("/owner/{id}")
@@ -52,12 +56,6 @@ public class WalletController {
             throw new InfoNotFoundException("Wallet not found");
         }
         return new ResponseEntity<>(wallets, HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<Object> createWallet(@RequestBody WalletCreationDTO walletParam) throws InfoNotFoundException {
-        walletService.save(walletParam);
-        return ResponseEntity.ok("Created");
     }
 
     @PostMapping("/collaborator")
@@ -71,7 +69,7 @@ public class WalletController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable("id") UUID idWallet) {
         walletService.deleteById(idWallet);
-        return ResponseEntity.ok("Deleted");
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/collaborator")

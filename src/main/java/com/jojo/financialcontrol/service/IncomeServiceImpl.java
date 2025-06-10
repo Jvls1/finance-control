@@ -68,7 +68,7 @@ public class IncomeServiceImpl implements IIncomeService {
     }
 
     @Override
-    public void save(IncomeCreationDTO incomeCreationTO) throws InfoNotFoundException {
+    public Income save(IncomeCreationDTO incomeCreationTO) throws InfoNotFoundException {
         Optional<Wallet> walletOptional = iWalletService.findById(incomeCreationTO.getIdWallet());
         if (walletOptional.isEmpty()) {
             throw new InfoNotFoundException("Wallet not found");
@@ -79,7 +79,7 @@ public class IncomeServiceImpl implements IIncomeService {
         income.setDateRegister(LocalDate.now());
         income.setWallet(walletOptional.get());
 
-        iIncomeRepository.save(income);
+        return iIncomeRepository.save(income);
     }
 
     @Override
