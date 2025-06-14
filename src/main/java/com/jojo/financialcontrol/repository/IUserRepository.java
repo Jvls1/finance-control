@@ -16,6 +16,8 @@ public interface IUserRepository extends IGenericRepository<User> {
 
     Optional<User> findByEmail(String email);
 
+    boolean existsByEmail(String email);
+
     @Transactional
     @Modifying
     @Query("""

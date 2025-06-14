@@ -1,47 +1,39 @@
 package com.jojo.financialcontrol.config;
 
-import com.jojo.financialcontrol.constants.SecurityConstants;
-import com.jojo.financialcontrol.config.filter.JWTTokenGeneratorFilter;
-import com.jojo.financialcontrol.config.filter.JWTTokenValidatorFilter;
 import com.jojo.financialcontrol.constants.Routes;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final SecurityConstants securityConstants;
+    private final AuthenticationProvider authenticationProvider;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
             .cors(cors -> cors.disable())
             .csrf(csrf -> csrf.disable())
-            .addFilterAfter(new JWTTokenGeneratorFilter(securityConstants), BasicAuthenticationFilter.class)
-            .addFilterBefore(new JWTTokenValidatorFilter(securityConstants), BasicAuthenticationFilter.class)
             .authorizeHttpRequests(requests -> requests
-                    .requestMatchers(Routes.LOGIN).permitAll()
-                    .requestMatchers(HttpMethod.POST, Routes.USER).permitAll()
+                    .requestMatchers(Routes.AUTH + "/**").permitAll()
                     .anyRequest().authenticated())
-            .httpBasic(Customizer.withDefaults());
-        return http.build();
-    }
+            .sessionManagement(session -> session
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authenticationProvider(authenticationProvider)
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return http.build();
     }
 
 }

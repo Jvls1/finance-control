@@ -11,6 +11,6 @@ public class Routes {
     public final static String INCOME = PREFIX+"/income";
     public final static String EXPENSE = PREFIX+"/expense";
     public final static String WALLET = PREFIX+"/wallet";
-    public final static String LOGIN = PREFIX+"/login";
+    public final static String AUTH = PREFIX+"/auth";
 
 }

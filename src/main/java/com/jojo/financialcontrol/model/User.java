@@ -1,6 +1,5 @@
 package com.jojo.financialcontrol.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -8,14 +7,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "usr")
 @Getter
 @Setter
 @NoArgsConstructor
-public class User extends BaseEntity {
+public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "name", length = 255, nullable = false)
     @Size(min = 4, max = 255)
@@ -32,11 +35,21 @@ public class User extends BaseEntity {
     @NotBlank(message = "Email is mandatory")
     private String email;
 
-    @OneToMany(mappedBy = "walletOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Wallet> walletsOwner;
+    // @OneToMany(mappedBy = "walletOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // @JsonIgnore
+    // private List<Wallet> walletsOwner;
 
-    @OneToMany(mappedBy = "walletCollaborator", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Wallet> walletsCollaborator;
+    // @OneToMany(mappedBy = "walletCollaborator", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // @JsonIgnore
+    // private List<Wallet> walletsCollaborator;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+       return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
 }

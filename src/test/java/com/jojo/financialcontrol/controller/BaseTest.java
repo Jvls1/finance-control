@@ -30,7 +30,7 @@ public class BaseTest {
 
     @Test
     public void loginTest() throws URISyntaxException {
-        final String baseUrl = "http://localhost:" + randomServerPort + Routes.LOGIN;
+        final String baseUrl = "http://localhost:" + randomServerPort + Routes.AUTH;
         URI uri = new URI(baseUrl);
 
         HttpHeaders basicLoginHeader = new HttpHeaders();
