@@ -1,0 +1,73 @@
+package com.jvls.financialcontrol.controllers;
+
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.security.SignatureException;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+
+import com.jvls.financialcontrol.dtos.ApiErrorDTO;
+import com.jvls.financialcontrol.exceptions.ConflictException;
+import com.jvls.financialcontrol.exceptions.FinancialControlException;
+import com.jvls.financialcontrol.utils.ApiErrorUtil;
+
+@ControllerAdvice
+public class RestExceptionHandler {
+
+    @ExceptionHandler(value = {DataIntegrityViolationException.class})
+    protected ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException ex, WebRequest request) {
+        return ApiErrorUtil.buildApiErrorResponse(new ApiErrorDTO());
+    }
+
+    @ExceptionHandler(value = {Exception.class})
+    protected ResponseEntity<Object> handleConflict(Exception ex, WebRequest request) {
+        return ApiErrorUtil.buildApiErrorResponse(new ApiErrorDTO());
+    }
+
+    @ExceptionHandler(value = {JwtException.class})
+    protected ResponseEntity<Object> handleSignatureException(JwtException ex, WebRequest request) {
+        ApiErrorDTO apiErrorDTO;
+        if (ex instanceof SignatureException) {
+            apiErrorDTO = new ApiErrorDTO("Invalid JWT signature", List.of(ex.getMessage()), HttpStatus.UNAUTHORIZED);
+        } else if (ex instanceof MalformedJwtException) {
+            apiErrorDTO = new ApiErrorDTO("Malformed JWT token", List.of(ex.getMessage()), HttpStatus.UNAUTHORIZED);
+        } else if (ex instanceof ExpiredJwtException) {
+            apiErrorDTO = new ApiErrorDTO("JWT token expired", List.of(ex.getMessage()), HttpStatus.UNAUTHORIZED);
+        } else {
+            apiErrorDTO = new ApiErrorDTO("JWT error", List.of(ex.getMessage()), HttpStatus.UNAUTHORIZED);
+        }
+        return ApiErrorUtil.buildApiErrorResponse(apiErrorDTO);
+    }
+
+    @ExceptionHandler(value = {FinancialControlException.class})
+    protected ResponseEntity<Object> handleFinancialControlException(FinancialControlException ex, WebRequest request) {
+        if(ex instanceof ConflictException) {
+            var apiErrorDTO = new ApiErrorDTO("Resource Conflict", List.of(ex.getMessage()), HttpStatus.CONFLICT);
+            return ApiErrorUtil.buildApiErrorResponse(apiErrorDTO);
+        }
+        return ApiErrorUtil.buildApiErrorResponse(new ApiErrorDTO());
+    }
+
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, WebRequest request) {
+        List<String> errors = ex.getBindingResult()
+            .getFieldErrors()
+            .stream()
+            .map(fieldError -> String.format("Field '%s': %s", fieldError.getField(), fieldError.getDefaultMessage()))
+            .collect(Collectors.toList());
+
+        var apiErrorDTO = new ApiErrorDTO("Validation failed for one or more fields.", errors, HttpStatus.BAD_REQUEST);
+        return ApiErrorUtil.buildApiErrorResponse(apiErrorDTO);
+    }
+
+}

@@ -1,4 +1,4 @@
-﻿# finance-control
+﻿# financial-control
 
 Projeto CRUD utilizando Java, Spring e Docker. Durante o desenvolvimento, pude aplicar as boas práticas aprendidas em cursos na Udemy, além de utilizar conhecimentos adquiridos através do Youtube e documentação das tecnologias citadas.
 
