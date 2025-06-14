@@ -22,21 +22,12 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class ExpenseServiceImpl implements IExpenseService {
+public class ExpenseService {
 
     private final IExpenseRepository iExpenseRepository;
+    private final SessionService sessionService;
+    private final WalletService walletService;
 
-    private final SessionServiceImpl sessionService;
-
-    private final WalletServiceImpl walletService;
-
-    @Override
-    @Deprecated
-    public Page<Expense> findAll(Integer page, Integer row) {
-        return iExpenseRepository.findAllByWalletWalletOwnerId(PageRequest.of(page, row), sessionService.sessionUser().getId());
-    }
-
-    @Override
     public Page<ExpenseResponseDTO> findAllExpense(Integer page, Integer row) {
         Page<Expense> expensePage = iExpenseRepository.findAllByWalletWalletOwnerId(PageRequest.of(page, row), sessionService.sessionUser().getId());
 
@@ -48,13 +39,6 @@ public class ExpenseServiceImpl implements IExpenseService {
         return new PageImpl<>(expenseResponseTOS);
     }
 
-    @Override
-    @Deprecated
-    public Optional<Expense> findById(UUID idExpense) {
-        return iExpenseRepository.findByIdAndWalletWalletOwnerId(idExpense, sessionService.sessionUser().getId());
-    }
-
-    @Override
     public Optional<ExpenseResponseDTO> findByIdExpense(UUID idExpense) {
         Optional<Expense> expenseOpt = iExpenseRepository.findByIdAndWalletWalletOwnerId(idExpense, sessionService.sessionUser().getId());
         if (expenseOpt.isEmpty()) {
@@ -65,14 +49,12 @@ public class ExpenseServiceImpl implements IExpenseService {
         return Optional.of(expenseResponseTO);
     }
 
-    @Override
     public void save(Expense expense) {
         expense.setDateRegister(LocalDate.now());
         expense.setEnumBuyMethod(EnumBuyMethod.CASH);
         iExpenseRepository.save(expense);
     }
 
-    @Override
     public Expense save(ExpenseCreationDTO expenseCreationTO) throws InfoNotFoundException {
         Optional<Wallet> walletOptional = walletService.findById(expenseCreationTO.getIdWallet());
         if (walletOptional.isEmpty()) {
@@ -88,7 +70,6 @@ public class ExpenseServiceImpl implements IExpenseService {
         return iExpenseRepository.save(expense);
     }
 
-    @Override
     public void deleteById(UUID idExpense) {
         iExpenseRepository.deleteByExpenseId(idExpense);
     }

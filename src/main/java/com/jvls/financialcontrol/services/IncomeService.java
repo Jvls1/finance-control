@@ -21,22 +21,15 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class IncomeServiceImpl implements IIncomeService {
+public class IncomeService {
 
     private final IIncomeRepository iIncomeRepository;
+    private final SessionService sessionService;
+    private final WalletService walletService;
 
-    private final ISessionService iSessionService;
-
-    private final IWalletService iWalletService;
-
-    @Override
-    @Deprecated
-    public Page<Income> findAll(Integer page, Integer row) {
-        return iIncomeRepository.findAllByWalletWalletOwnerId(PageRequest.of(page, row), iSessionService.sessionUser().getId());
-    }
 
     public Page<IncomeResponseDTO> findAllIncome(Integer page, Integer row) {
-        Page<Income> incomePage = iIncomeRepository.findAllByWalletWalletOwnerId(PageRequest.of(page, row), iSessionService.sessionUser().getId());
+        Page<Income> incomePage = iIncomeRepository.findAllByWalletWalletOwnerId(PageRequest.of(page, row), sessionService.sessionUser().getId());
 
         List<IncomeResponseDTO> expenseResponseTOS = incomePage.getContent()
                 .stream()
@@ -46,14 +39,8 @@ public class IncomeServiceImpl implements IIncomeService {
         return new PageImpl<>(expenseResponseTOS);
     }
 
-    @Override
-    @Deprecated
-    public Optional<Income> findById(UUID idIncome) {
-        return iIncomeRepository.findByIdAndWalletWalletOwnerId(idIncome, iSessionService.sessionUser().getId());
-    }
-
     public Optional<IncomeResponseDTO> findByIdIncome(UUID idIncome) throws InfoNotFoundException {
-        Optional<Income> incomeOpt = iIncomeRepository.findByIdAndWalletWalletOwnerId(idIncome, iSessionService.sessionUser().getId());
+        Optional<Income> incomeOpt = iIncomeRepository.findByIdAndWalletWalletOwnerId(idIncome, sessionService.sessionUser().getId());
         if(incomeOpt.isEmpty()) {
             return Optional.empty();
         }
@@ -62,15 +49,13 @@ public class IncomeServiceImpl implements IIncomeService {
         return Optional.of(incomeResponseTO);
     }
 
-    @Override
     public void save(Income income) {
         income.setDateRegister(LocalDate.now());
         iIncomeRepository.save(income);
     }
 
-    @Override
     public Income save(IncomeCreationDTO incomeCreationTO) throws InfoNotFoundException {
-        Optional<Wallet> walletOptional = iWalletService.findById(incomeCreationTO.getIdWallet());
+        Optional<Wallet> walletOptional = walletService.findById(incomeCreationTO.getIdWallet());
         if (walletOptional.isEmpty()) {
             throw new InfoNotFoundException("Wallet not found");
         }
@@ -83,7 +68,6 @@ public class IncomeServiceImpl implements IIncomeService {
         return iIncomeRepository.save(income);
     }
 
-    @Override
     public void deleteById(UUID income) {
         iIncomeRepository.deleteByIncomeId(income);
     }

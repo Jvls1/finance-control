@@ -10,7 +10,7 @@ import com.jvls.financialcontrol.constants.Routes;
 import com.jvls.financialcontrol.dtos.ExpenseCreationDTO;
 import com.jvls.financialcontrol.dtos.ExpenseResponseDTO;
 import com.jvls.financialcontrol.exceptions.InfoNotFoundException;
-import com.jvls.financialcontrol.services.ExpenseServiceImpl;
+import com.jvls.financialcontrol.services.ExpenseService;
 import com.jvls.financialcontrol.utils.URIUtil;
 
 import java.util.Optional;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ExpenseController {
 
-    private final ExpenseServiceImpl expenseService;
+    private final ExpenseService expenseService;
 
     @PostMapping
     public ResponseEntity<Object> save(@RequestBody ExpenseCreationDTO expenseParam) throws InfoNotFoundException {

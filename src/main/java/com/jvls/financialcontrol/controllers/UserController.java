@@ -10,7 +10,7 @@ import com.jvls.financialcontrol.dtos.UserCreationDTO;
 import com.jvls.financialcontrol.entities.User;
 import com.jvls.financialcontrol.exceptions.InfoNotFoundException;
 import com.jvls.financialcontrol.exceptions.UserCreationException;
-import com.jvls.financialcontrol.services.UserServiceImpl;
+import com.jvls.financialcontrol.services.UserService;
 import com.jvls.financialcontrol.utils.URIUtil;
 
 import java.util.Optional;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @PostMapping
     public ResponseEntity<Object> save(@Valid @RequestBody UserCreationDTO userCreationTO) throws UserCreationException {

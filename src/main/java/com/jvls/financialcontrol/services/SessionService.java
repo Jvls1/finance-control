@@ -14,17 +14,16 @@ import java.util.Optional;
 @SessionScope
 @Service
 @RequiredArgsConstructor
-public class SessionServiceImpl implements ISessionService {
+public class SessionService {
 
-    private final IUserService iUserService;
+    private final UserService userService;
 
-    @Override
     public User sessionUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null) {
             throw new AuthenticationNotFoundException();
         }
-        Optional<User> userOptional = iUserService.findByEmail(authentication.getName());
+        Optional<User> userOptional = userService.findByEmail(authentication.getName());
         if (userOptional.isEmpty()) {
             throw new AuthenticationNotFoundException("User not founded");
         }

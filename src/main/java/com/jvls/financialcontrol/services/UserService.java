@@ -20,23 +20,19 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements IUserService {
+public class UserService {
 
     private final PasswordEncoder passwordEncoder;
-
     private final IUserRepository iUserRepository;
 
-    @Override
     public Page<User> findAll(Integer page, Integer rows) {
         return iUserRepository.findAll(PageRequest.of(page, rows));
     }
 
-    @Override
     public Optional<User> findById(UUID idUser) {
         return iUserRepository.findById(idUser);
     }
 
-    @Override
     public void save(User user) throws UserCreationException {
         if (!StringUtil.isEmailValid(user.getEmail())) {
             throw new UserCreationException("Invalid Email");
@@ -44,7 +40,6 @@ public class UserServiceImpl implements IUserService {
         iUserRepository.save(user);
     }
 
-    @Override
     public User createUser(UserCreationDTO userCreationTO) throws UserCreationException {
         var now = LocalDateTime.now();
         if (!StringUtil.isEmailValid(userCreationTO.getEmail())) {
@@ -61,7 +56,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     public User updateUser(UUID idUser, UserCreationDTO userCreationTO) throws Exception {
-//        TODO: think the best impl to update a user...
         Optional<User> userOptional = iUserRepository.findById(idUser);
         if (userOptional.isEmpty()) {
             throw new InfoNotFoundException("User not found");
@@ -86,7 +80,6 @@ public class UserServiceImpl implements IUserService {
         return iUserRepository.save(user);
     }
 
-    @Override
     public void deleteById(UUID idUser) throws InfoNotFoundException {
         boolean existsById = iUserRepository.existsById(idUser);
         if (!existsById) {
@@ -95,7 +88,6 @@ public class UserServiceImpl implements IUserService {
         iUserRepository.deleteUserById(idUser);
     }
 
-    @Override
     public Optional<User> findByEmail(String email) {
         return iUserRepository.findByEmail(email);
     }

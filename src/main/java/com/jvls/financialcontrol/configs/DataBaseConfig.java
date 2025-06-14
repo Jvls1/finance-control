@@ -10,7 +10,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.jojo.financialcontrol.repository")
+@EnableJpaRepositories(basePackages = "com.jvls.financialcontrol.repositories")
 public class DataBaseConfig {
 
     @Autowired

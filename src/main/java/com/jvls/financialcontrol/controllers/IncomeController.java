@@ -10,7 +10,7 @@ import com.jvls.financialcontrol.constants.Routes;
 import com.jvls.financialcontrol.dtos.IncomeCreationDTO;
 import com.jvls.financialcontrol.dtos.IncomeResponseDTO;
 import com.jvls.financialcontrol.exceptions.InfoNotFoundException;
-import com.jvls.financialcontrol.services.IncomeServiceImpl;
+import com.jvls.financialcontrol.services.IncomeService;
 import com.jvls.financialcontrol.utils.URIUtil;
 
 import java.util.Optional;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class IncomeController {
 
-    private final IncomeServiceImpl incomeService;
+    private final IncomeService incomeService;
 
     @PostMapping
     public ResponseEntity<Object> save(@RequestBody IncomeCreationDTO incomeParam) throws InfoNotFoundException {

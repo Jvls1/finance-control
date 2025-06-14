@@ -11,7 +11,7 @@ import com.jvls.financialcontrol.constants.Routes;
 import com.jvls.financialcontrol.dtos.WalletCreationDTO;
 import com.jvls.financialcontrol.entities.Wallet;
 import com.jvls.financialcontrol.exceptions.InfoNotFoundException;
-import com.jvls.financialcontrol.services.WalletServiceImpl;
+import com.jvls.financialcontrol.services.WalletService;
 import com.jvls.financialcontrol.utils.URIUtil;
 
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class WalletController {
 
-    private final WalletServiceImpl walletService;
+    private final WalletService walletService;
 
     @PostMapping
     public ResponseEntity<Object> createWallet(@RequestBody WalletCreationDTO walletParam) throws InfoNotFoundException {
