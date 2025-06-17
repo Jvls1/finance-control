@@ -8,6 +8,7 @@ CREATE TABLE expense
     amount        DECIMAL(8, 2) NOT NULL,
     date_register date          NOT NULL,
     id_wallet     UUID,
+    id_category   UUID,
     buy_method    VARCHAR(255)  NOT NULL,
     CONSTRAINT pk_expense PRIMARY KEY (id)
 );
@@ -50,4 +51,15 @@ CREATE TABLE wallet
     id_user_owner        UUID     NOT NULL,
     id_user_collaborator UUID,
     CONSTRAINT pk_wallet PRIMARY KEY (id)
+);
+
+CREATE TABLE category
+(
+    id            UUID         NOT NULL,
+    time_creation TIMESTAMP WITHOUT TIME ZONE,
+    time_update   TIMESTAMP WITHOUT TIME ZONE,
+    time_removed  TIMESTAMP WITHOUT TIME ZONE,
+    name          VARCHAR(255) NOT NULL,
+    description   VARCHAR(255) NOT NULL,
+    CONSTRAINT pk_category PRIMARY KEY (id)
 );
